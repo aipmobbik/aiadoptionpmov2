@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Initiation &amp; Planning – Prompt Library</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Segoe UI",Arial,sans-serif;font-size:15px;color:#1e2640;background:#f2f5fa;-webkit-font-smoothing:antialiased;}
+.topnav{background:linear-gradient(120deg,#d6e7f8 0%,#bdd4f4 55%,#b0c9f2 100%);color:#1e2640;display:flex;align-items:center;padding:0 32px;height:56px;gap:0;box-shadow:0 1px 3px rgba(43,52,120,.14);}
+.topnav .brand{font-weight:800;font-size:15px;margin-right:36px;color:#1e2640;letter-spacing:-.01em;}
+.topnav a{color:rgba(30,38,64,.6);text-decoration:none;padding:0 16px;height:56px;display:flex;align-items:center;font-size:13.5px;font-weight:500;transition:color .15s,background .15s;}
+.topnav a:hover{color:#1e2640;background:rgba(43,52,120,.07);}
+.topnav a.active{color:#2B3478;font-weight:600;background:rgba(39,82,224,.1);border-bottom:2px solid #2752E0;}
+.wrapper{display:flex;min-height:calc(100vh - 56px);}
+.sidebar{width:256px;flex-shrink:0;background:linear-gradient(180deg,#d4e6f7 0%,#e2eff8 40%,#edf4fb 100%);border-right:1px solid rgba(43,52,120,.1);position:sticky;top:0;height:calc(100vh - 56px);overflow-y:auto;}
+.sidebar .section-label{display:none;}
+.content{flex:1;padding:44px clamp(24px,4%,56px) 64px clamp(24px,4%,56px);max-width:100%;background:#fff;}
+h1{font-size:1.85rem;font-weight:800;color:#1e2640;margin-bottom:6px;letter-spacing:-.03em;}
+.subtitle{color:#5280CC;font-size:13.5px;font-style:italic;margin-bottom:36px;opacity:.9;}
+h2{font-size:1.1rem;font-weight:700;color:#2B3478;margin:0 0 20px;padding-bottom:10px;border-bottom:1.5px solid #45C8F0;letter-spacing:-.01em;}
+.card{border:1px solid rgba(43,52,120,.09);border-radius:16px;margin-bottom:10px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(43,52,120,.05),0 1px 2px rgba(0,0,0,.03);transition:box-shadow .2s,border-color .2s;}
+.card:hover{box-shadow:0 4px 16px rgba(43,52,120,.1);border-color:rgba(43,52,120,.14);}
+.card-header{padding:18px 22px;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;background:#fff;transition:background .12s;}
+.card-header:hover{background:#fafbff;}
+.card-header-left{flex:1;}
+.card-title{font-size:.93rem;font-weight:700;color:#1e2640;margin-bottom:3px;letter-spacing:-.01em;}
+.card-role{font-size:12px;color:#94a3b8;font-style:italic;}
+.card-badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px;}
+.badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700;white-space:nowrap;letter-spacing:.01em;}
+.badge.generic{background:#dcfce7;color:#166534;}
+.badge.specific{background:#fff7ed;color:#9a3412;}
+.badge.light{background:#e0f7ff;color:#0369a1;}
+.badge.heavy{background:#eef0fa;color:#2B3478;}
+.badge.tools{background:#f0f5ff;color:#2752E0;border:1px solid #c7d9ff;}
+.chevron{font-size:14px;color:#c8cfd8;flex-shrink:0;margin-top:4px;transition:transform .2s;}
+.card.open .chevron{transform:rotate(180deg);}
+.card-body{display:none;border-top:1px solid rgba(43,52,120,.07);}
+.card.open .card-body{display:block;}
+.card-section{padding:18px 22px;border-bottom:1px solid rgba(43,52,120,.05);}
+.card-section:last-child{border-bottom:none;}
+.card-section h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.09em;color:#5a6490;font-weight:700;margin-bottom:10px;}
+.card-section ul{padding-left:18px;}
+.card-section ul li{margin-bottom:6px;font-size:13.5px;line-height:1.65;color:#374060;}
+.tip-box{background:#fffdf0;border-left:2px solid #f6c90e;padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px;color:#78610a;margin-top:10px;}
+.prompt-pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+@media(max-width:700px){.prompt-pair-grid{grid-template-columns:1fr;}}
+.prompt-col{display:flex;flex-direction:column;gap:8px;}
+.prompt-wrapper{display:flex;flex-direction:column;flex:1;border:1px solid rgba(43,52,120,.1);border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(43,52,120,.04);}
+.prompt-card-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 14px;background:#f5f8ff;border-bottom:1px solid rgba(43,52,120,.08);}
+.prompt-label{font-size:12px;font-weight:600;color:#2752E0;font-style:italic;margin:0;text-transform:none;letter-spacing:0;flex:1;}
+.prompt-block{background:#fff;color:#2a3350;padding:14px 16px;font-family:"Segoe UI",Arial,sans-serif;font-size:12.5px;line-height:1.8;white-space:pre-wrap;word-break:break-word;flex:1;border:none;margin:0;}
+.copy-btn{flex-shrink:0;background:#2752E0;color:#fff;border:none;padding:4px 13px;border-radius:8px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:"Segoe UI",Arial,sans-serif;transition:background .15s,box-shadow .15s;white-space:nowrap;}
+.copy-btn:hover{background:#1d3cc0;box-shadow:0 2px 8px rgba(39,82,224,.3);}
+.copy-btn.copied{background:#16a34a;box-shadow:none;}
+.bh{color:#2752E0;font-weight:700;}
+.template-remark{background:#fffbf0;border-left:2px solid #f59e0b;padding:7px 12px;font-size:12px;color:#92400e;border-radius:0 8px 8px 0;}
+.io-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:700px){.io-grid{grid-template-columns:1fr;}}
+.io-col{background:#fafbfd;border:1px solid rgba(43,52,120,.07);border-radius:10px;padding:16px 18px;}
+.io-col h4{margin-bottom:10px;}
+footer{text-align:center;padding:20px;font-size:12px;color:#b0bacf;border-top:1px solid rgba(43,52,120,.07);}
+.nav-item{position:relative;display:flex;align-items:center;}
+.nav-item>a{color:rgba(30,38,64,.6);text-decoration:none;padding:0 16px;height:56px;display:flex;align-items:center;font-size:13.5px;font-weight:500;transition:color .15s,background .15s;white-space:nowrap;}
+.nav-item:hover>a{color:#1e2640;background:rgba(43,52,120,.07);}
+.nav-item.active>a{color:#2B3478;font-weight:600;background:rgba(39,82,224,.1);border-bottom:2px solid #2752E0;}
+.nav-dropdown{display:none;position:absolute;top:56px;left:0;background:#fff;border:1px solid rgba(43,52,120,.1);border-radius:0 0 12px 12px;min-width:220px;z-index:100;box-shadow:0 8px 28px rgba(43,52,120,.14);}
+.nav-item:hover .nav-dropdown{display:block;}
+.nav-dropdown a{display:flex;align-items:center;padding:10px 18px;color:#374060;text-decoration:none;font-size:13px;transition:background .1s;border:none;height:auto;}
+.nav-dropdown a:hover{background:#f0f5ff;color:#2752E0;}
+.phase-item{border-bottom:1px solid rgba(43,52,120,.1);}
+.phase-item:last-child{border-bottom:none;}
+.phase-header{display:flex;justify-content:space-between;align-items:center;padding:15px 22px;cursor:pointer;color:#1e2640;font-size:14px;font-weight:700;letter-spacing:-.01em;transition:color .12s,background .12s;user-select:none;}
+.phase-header:hover{background:rgba(43,52,120,.05);color:#2752E0;}
+.phase-item.open>.phase-header{color:#2752E0;background:rgba(39,82,224,.07);}
+.phase-chevron{font-size:18px;font-style:normal;transition:transform .2s;flex-shrink:0;color:rgba(30,38,64,.3);line-height:1;}
+.phase-item.open .phase-chevron{transform:rotate(90deg);}
+.phase-subs{display:none;background:rgba(255,255,255,.45);border-top:1px solid rgba(43,52,120,.07);}
+.phase-item.open .phase-subs{display:block;}
+.sidebar a.sub{display:flex;align-items:center;gap:6px;padding:9px 22px 9px 28px;color:#374060;text-decoration:none;font-size:13px;border-left:none;transition:color .1s,background .1s;}
+.sidebar a.sub::before{content:'›';font-size:16px;color:rgba(43,52,120,.3);flex-shrink:0;line-height:1;}
+.sidebar a.sub:hover{color:#2752E0;background:rgba(39,82,224,.06);}
+.sidebar a.sub:hover::before{color:#2752E0;}
+a.phase-header{text-decoration:none;}
+
+    /* ── OUTPUT EXAMPLE ── */
+    .output-example-section{background:linear-gradient(135deg,#f6f9ff 0%,#eef4fd 100%);border-top:2px solid #45C8F0;padding:18px 22px;}
+    .output-label{font-size:12.5px;font-style:italic;color:#5a6490;margin-bottom:8px;letter-spacing:.02em;text-transform:none;font-weight:600;}
+    .output-box{background:#fff;border:1px solid rgba(43,52,120,.1);border-radius:10px;padding:16px 18px;}
+    .output-title{font-size:13.5px;font-weight:800;color:#1a3a5c;margin-bottom:12px;letter-spacing:-.01em;}
+    .out-row{margin-bottom:12px;}
+    .out-row:last-child{margin-bottom:0;}
+    .out-row-title{font-size:10px;font-weight:700;color:#2B3478;text-transform:uppercase;letter-spacing:.09em;margin-bottom:4px;}
+    .out-row-body{font-size:12.5px;color:#374060;line-height:1.7;}
+    .out-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px;}
+    .out-table th{background:#f0f5ff;color:#2B3478;font-weight:700;padding:6px 10px;text-align:left;font-size:11px;border:1px solid rgba(43,52,120,.1);}
+    .out-table td{padding:6px 10px;border:1px solid rgba(43,52,120,.07);color:#374060;vertical-align:top;}
+    .out-table tr:nth-child(even) td{background:#fafbff;}
+    .cp-tag{background:#2752E0;color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px;}
+    .out-img{width:100%;border-radius:6px;border:1px solid rgba(43,52,120,.1);display:block;}
+    .out-img-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+    .out-img-wrap{background:#f8faff;border-radius:8px;padding:4px;border:1px solid rgba(43,52,120,.07);}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="brand">AI @ PMO</span>
+  <a href="index.html">AI Guideline</a>
+  <div class="nav-item active">
+    <a href="prompt-library-initiation.html">Prompt Library ▾</a>
+    <div class="nav-dropdown">
+      <a href="prompt-library-initiation.html">Initiation &amp; Planning</a>
+      <a href="prompt-library-execution.html">Execution</a>
+      <a href="prompt-library-monitoring.html">Monitoring &amp; Controlling</a>
+      <a href="prompt-library-closure.html">Closure</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrapper">
+  <nav class="sidebar">
+    <!-- Phase 1: CURRENT -->
+    <div class="phase-item open" id="ph1">
+      <div class="phase-header" onclick="togglePhase('ph1')">
+        Initiation &amp; Planning
+        <i class="phase-chevron">›</i>
+      </div>
+      <div class="phase-subs">
+        <a class="sub" href="#s6">Project Charter</a>
+        <a class="sub" href="#s7">Project Schedule</a>
+        <a class="sub" href="#s8">Resource Allocation Plan</a>
+        <a class="sub" href="#s10">Requirement &amp; Backlog Analysis</a>
+        <a class="sub" href="#s11">RAID Log</a>
+        <a class="sub" href="#s12">Stakeholder Register &amp; Map</a>
+        <a class="sub" href="#s13">Communication Plan</a>
+      </div>
+    </div>
+    <!-- Phase 2 -->
+    <div class="phase-item" id="ph2">
+      <a class="phase-header" href="prompt-library-execution.html">
+        Execution
+        <i class="phase-chevron">›</i>
+      </a>
+    </div>
+    <!-- Phase 3 -->
+    <div class="phase-item" id="ph3">
+      <a class="phase-header" href="prompt-library-monitoring.html">
+        Monitoring &amp; Controlling
+        <i class="phase-chevron">›</i>
+      </a>
+    </div>
+    <!-- Phase 4 -->
+    <div class="phase-item" id="ph4">
+      <a class="phase-header" href="prompt-library-closure.html">
+        Closure
+        <i class="phase-chevron">›</i>
+      </a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <h1>Initiation &amp; Planning</h1>
+    <p class="subtitle">Set the right foundation — define scope, build schedules, and align stakeholders before work begins.</p>
+
+    <!-- Card s6 -->
+    <div class="card" id="s6">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-left">
+          <div class="card-title">Generate a Project Charter</div>
+          <div class="card-role">Help PMOs rapidly define project scope, governance, and stakeholder alignment</div>
+          <div class="card-badges">
+            <span class="badge specific">Specific</span>
+            <span class="badge heavy">Heavy context</span>
+            <span class="badge tools">ChatGPT · Claude</span>
+          </div>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-section">
+          <div class="io-grid">
+            <div class="io-col">
+              <h4>Input</h4>
+              <ul>
+                <li>Project background &amp; business objectives</li>
+                <li>Scope (what's in / what's out)</li>
+                <li>Key stakeholders, sponsor &amp; PM</li>
+                <li>Budget, timeline, and constraints</li>
+              </ul>
+              <div class="tip-box">💡 Even a rough brief works — AI will surface gaps and list assumptions.</div>
+            </div>
+            <div class="io-col">
+              <h4>Output</h4>
+              <ul>
+                <li>Formal project charter (ready to review)</li>
+                <li>Scope, objectives &amp; success criteria</li>
+                <li>Stakeholder RACI matrix draft</li>
+                <li>Risks, assumptions &amp; constraints</li>
+              </ul>
+            </div>
+          </div>
+        
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">PROJECT CHARTER &mdash; CBS</div>
+            <div class="out-row"><div class="out-row-title">Executive Summary</div><div class="out-row-body">This charter authorises Bluebik Group (BBIK) to deliver a 12-month PMO service governing the IT integration programme across five subsidiaries. The PMO will provide project governance, cross-functional coordination, risk management, change management, and stakeholder communication &mdash; ensuring delivery on time, within budget, and to agreed quality standards.</div></div><div class="out-row"><div class="out-row-title">Objective</div><div class="out-row-body">1. Establish PMO governance across IT landscape<br>2. Achieve IT integration readiness by 15-Nov-2025<br>3. Reduce milestone slippage: &ge;90% on-time delivery across all workstreams</div></div><div class="out-row"><div class="out-row-title">Scope In/Out</div><div class="out-row-body"><span style='color:#166534'>&#10003; In:</span> Governance, Cross-functional PMO, Integration Planning, Risk, Change Mgmt<br><span style='color:#9a3412'>&#10007; Out:</span> IT development/coding, vendor procurement, HR headcount decisions, legal compliance</div></div><div class="out-row"><div class="out-row-title">Stakeholder RACI</div><div class="out-row-body">CTO &mdash; Accountable (Sponsor)<br>PMO Director &mdash; Responsible<br>PMO Manager &mdash; Responsible<br>IT Leadership &mdash; Consult</div></div><div class="out-row"><div class="out-row-title">High-Level Milestones</div><div class="out-row-body">M1 Kick-off &amp; Governance Setup &nbsp;&bull;&nbsp; Feb 2025<br>M3 Master Integration Plan &nbsp;&bull;&nbsp; Mar 2025<br>M5 Phase 1 Foundation Delivery &nbsp;&bull;&nbsp; Apr&ndash;Jun 2025<br>M9 Go-Live Readiness Review &nbsp;&bull;&nbsp; Nov 2025</div></div><div class="out-row"><div class="out-row-title">Top 3 Risks &amp; Assumptions</div><div class="out-row-body">1. Stakeholder misalignment &rarr; 4&ndash;8 wk Go-Live buffer<br>2. BSS/OSS hidden dependencies &rarr; AS-IS mapping in M2; 15% schedule buffer<br>3. Key PMO resource attrition &rarr; Succession plan &amp; knowledge docs assumed pre-approved</div></div>
+          </div>
+        </div>
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project initiation — paste your project brief directly. No documents required for the template version.</p>
+        </div>
+        <div class="card-section">
+          <div class="prompt-label">Template</div>
+          <div class="prompt-block">You are a [role, e.g., Senior PMO Specialist].
+Create a formal Project Charter for [Project Name]. A [project type] to [objective] for [organization].
+Context: Sponsor: [Name]. Stakeholders: [list]. Budget: [approx.]. Go-live: [date]. Constraints: [e.g., regulatory deadline].
+Scope (In): [what is included]. Scope (Out): [what is excluded]. Tone: [Executive-level / Team-facing].
+Output:
+Full Charter: Objectives | Scope In/Out | RACI | Milestones | Budget Summary | Risks & Assumptions | Success Criteria | Sign-off section.
+Evaluation: Flag any section where data is missing. List all assumptions. Highlight top 3 risks to delivery.</div>
+          <div class="prompt-label">Full example</div>
+          <div class="prompt-block">You are a Senior PMO Specialist with 10+ years of IT transformation experience.
+Create a formal Project Charter for PMO Service for CBS project.
+Context: Sponsor: CFO | Stakeholders: IT. Attach: Proposal.
+Scope (In): PMO Service. Flag any information gap.
+Output: Full Charter: Objectives | Scope In/Out | RACI | Milestones | Budget | Risks & Assumptions | Success Criteria | Sign-off table.
+Evaluation: Verify all sections complete. Flag assumptions without a source. Highlight top 3 risks to Go-Live.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card s7 -->
+    <div class="card" id="s7">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-left">
+          <div class="card-title">Generate a Project Schedule</div>
+          <div class="card-role">Help PMOs structure, prioritize, and track project activities faster</div>
+          <div class="card-badges">
+            <span class="badge specific">Specific</span>
+            <span class="badge heavy">Heavy context</span>
+            <span class="badge tools">ChatGPT · Claude</span>
+          </div>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-section">
+          <div class="io-grid">
+            <div class="io-col">
+              <h4>Input</h4>
+              <ul>
+                <li>Project charter (objectives, scope, phases)</li>
+                <li>Team availability / capacity data</li>
+                <li>WBS or deliverable list (optional)</li>
+              </ul>
+              <div class="tip-box">💡 Include phase durations and known dependencies — AI builds a more realistic critical path.</div>
+            </div>
+            <div class="io-col">
+              <h4>Output</h4>
+              <ul>
+                <li>Structured schedule with phases &amp; milestones</li>
+                <li>Task list with owners, durations &amp; dependencies</li>
+                <li>Critical path highlights &amp; schedule risks</li>
+              </ul>
+            </div>
+          </div>
+        
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">PROJECT SCHEDULE &mdash; DM&amp;A Phase 3</div>
+            <div class="out-row"><div class="out-row-title">Phase Timeline</div><div class="out-row-body"><table class='out-table'><tr><th>Workstream</th><th>Weeks</th><th>Key Deliverables</th></tr><tr><td>Data Governance</td><td>Wk 1&ndash;43</td><td>Purview setup, Data Dictionary (F&A), training &amp; KT</td></tr><tr><td>Data Visualization</td><td>Wk 1&ndash;35</td><td>UATs &rarr; 3 dashboards &rarr; SIT &rarr; UAT &rarr; Power BI publish <span class='cp-tag'>CP</span></td></tr><tr><td>Machine Learning</td><td>Wk 1&ndash;39</td><td>ML#3 Sales Forecast + ML#4 Demand Forecast &rarr; deploy <span class='cp-tag'>CP</span></td></tr><tr><td>Data Lake / Cloud</td><td>Wk 1&ndash;43</td><td>Pipelines, ETL ~300 tables, monitoring, security <span class='cp-tag'>CP</span></td></tr><tr><td>PMO</td><td>Wk 1&ndash;43</td><td>Weekly reports &bull; SteerCo &bull; KPI Mo. 5 &amp; 10 &bull; closure</td></tr></table></div></div><div class="out-row"><div class="out-row-title">Critical Path</div><div class="out-row-body">Kick-off &rarr; Req. gathering &amp; SKU workshops &rarr; Model spec &amp; EDA &rarr; DV &amp; ML development &rarr; SIT &rarr; UAT &rarr; Publish &amp; deploy &rarr; KT &amp; handovers &rarr; Closure (Nov 2024)</div></div><div class="out-row"><div class="out-row-title">Top 3 Schedule Risks</div><div class="out-row-body">1. UAT delays &mdash; rework adds &ge;2 wks per workstream. Fix: 5-day defect SLA, dedicated UAT lead.<br>2. DL/CP pipeline readiness blocks DV &amp; ML simultaneously. Fix: weekly pipeline health check.<br>3. Stakeholder availability &mdash; SKU workshops need 5 business leads at once. Fix: lock dates Week 1.</div></div>
+          </div>
+        </div>
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project kickoff or phase start. Attach charter + team roster.</p>
+        </div>
+        <div class="card-section">
+          <div class="prompt-label">Template</div>
+          <div class="prompt-block">You are a [role, e.g., Senior PMO Specialist].
+Create a structured project schedule for [Project Name] covering phases: [list phases].
+Attach: [project charter + team roster or WBS].
+Team capacity: [X members, Y hrs/week]. Flag critical path tasks. [Director-level / Team-facing] tone.
+Output:
+Phase timeline table (Phase | Start | End | Duration)
+Task list (Task | Owner | Duration | Dependencies)
+Critical path with top 3 schedule risks
+Evaluation: Verify all phases from the charter are covered. Flag tasks without owners or missing dependencies.</div>
+          <div class="prompt-label">Full example</div>
+          <div class="prompt-block">You are a Senior PMO Specialist with 10+ years of IT project delivery experience.
+Create a structured project schedule for the ERP Integration project covering phases: Discovery, Design, Build, UAT, and Go-Live.
+The attached deck is the TCP DM&A Phase 3 Kick-off presentation. Use it as the sole source of truth for scope, workstreams, team structure, and timelines.
+Inputs provided: Phase 3 Kick-off deck (attached). Team availability: all members at 40 hrs/week unless stated otherwise.
+Output:
+Phase timeline table (Phase | Start | End | Duration)
+Task list (Task | Owner | Duration | Dependencies)
+Critical path with top 3 schedule risks
+Evaluation: Verify all phases from the charter are covered. Flag tasks without owners or missing dependencies.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card s8 -->
+    <div class="card" id="s8">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-left">
+          <div class="card-title">Resource Allocation Plan</div>
+          <div class="card-role">Optimize team allocation and forecast capacity gaps before they impact delivery</div>
+          <div class="card-badges">
+            <span class="badge specific">Specific</span>
+            <span class="badge heavy">Heavy context</span>
+            <span class="badge tools">ChatGPT · Claude</span>
+          </div>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-section">
+          <div class="io-grid">
+            <div class="io-col">
+              <h4>Input</h4>
+              <ul>
+                <li>Project plan (phases &amp; tasks with durations)</li>
+                <li>Team roster with roles &amp; availability (%)</li>
+                <li>Skills matrix (optional but recommended)</li>
+              </ul>
+              <div class="tip-box">💡 Include actual availability %, not just FTE counts — AI flags over-allocation accurately.</div>
+            </div>
+            <div class="io-col">
+              <h4>Output</h4>
+              <ul>
+                <li>Resource allocation matrix (who does what, when)</li>
+                <li>Over-allocation warnings with recommended fixes</li>
+                <li>Skill gap analysis and hiring/contracting flags</li>
+              </ul>
+            </div>
+          </div>
+        
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">RESOURCE ALLOCATION PLAN &mdash; SuperApp (MVP 1.1&ndash;1.2)</div>
+            <div class="out-row"><div class="out-row-title">Period</div><div class="out-row-body">21 Nov 2025 &ndash; 4 Jun 2026</div></div><div class="out-row"><div class="out-row-title">Over-Allocation Review</div><div class="out-row-body">No individual resource allocation exceeds 100%.<br>Executive and governance roles remain within advisory capacity:<br>PM (10%) &bull; Tech Lead (20%) &bull; Frontend Senior (50%)</div></div><div class="out-row"><div class="out-row-title">Skill Gaps</div><div class="out-row-body"><strong>BA capacity reduces after May</strong> &mdash; contract 1 Senior BA.<br><strong>Senior BE support ends before stabilization</strong> &mdash; extend or contract 1 Senior BE.</div></div>
+          </div>
+        </div>
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or when team composition changes. Attach project plan + team roster.</p>
+        </div>
+        <div class="card-section">
+          <div class="prompt-label">Template</div>
+          <div class="prompt-block">You are a [role, e.g., Senior PMO Resource Manager].
+Create a resource allocation plan for [Project Name] covering [timeframe].
+Attach: [project plan + team roster with availability % + skills matrix (optional)].
+Flag over-allocation above [X]%. Identify skill gaps. [Director-level / PM-facing] tone.
+Output:
+Resource allocation matrix (Role | Person | Phase | % Allocated | Notes)
+Over-allocation flags with recommended mitigations
+Skill gap summary with hire/contract recommendations
+Evaluation: Verify total allocation per person does not exceed 100%. Flag phases with no assigned resource.</div>
+          <div class="prompt-label">Full example</div>
+          <div class="prompt-block">You are a Senior PMO.
+Create a resource allocation plan for Super App project covering from 21 Nov–4 Jun.
+Attach: the detailed project plan and the team roster (8 resources, varying availability).
+Flag over-allocation above 90%. Identify skill gaps for UAT phase. PM-facing, concise tone.
+Output:
+Resource allocation matrix (Role | Person | Phase | % Allocated | Notes)
+Over-allocation flags with recommended mitigations
+Skill gap summary with hire/contract recommendations
+Evaluation: Verify total allocation per person does not exceed 100%. Flag phases with no assigned resource.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card s10 -->
+    <div class="card" id="s10">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-left">
+          <div class="card-title">Requirement &amp; Backlog Analysis</div>
+          <div class="card-role">Help PMOs understand project information faster and identify risks early</div>
+          <div class="card-badges">
+            <span class="badge specific">Specific</span>
+            <span class="badge heavy">Heavy context</span>
+            <span class="badge tools">ChatGPT · Claude</span>
+          </div>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-section">
+          <div class="io-grid">
+            <div class="io-col">
+              <h4>Input</h4>
+              <ul>
+                <li>Requirement documents / user stories</li>
+                <li>Product backlog items (with acceptance criteria)</li>
+                <li>Business case or scope definition</li>
+              </ul>
+              <div class="tip-box">💡 Include acceptance criteria — AI flags vague or testability-gap requirements more accurately.</div>
+            </div>
+            <div class="io-col">
+              <h4>Output</h4>
+              <ul>
+                <li>Gaps, conflicts, or missing requirements</li>
+                <li>Backlog items grouped by theme with priority</li>
+                <li>Risk flags for unclear or untestable requirements</li>
+              </ul>
+            </div>
+          </div>
+        
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">REQUIREMENT ANALYSIS &mdash; SuperApp Phase 2</div>
+            <div class="out-row"><div class="out-row-title">Gap Analysis</div><div class="out-row-body">Gaps identified across backlog items including missing acceptance criteria, undefined integration contracts, and unconfirmed business rules.</div></div><div class="out-row"><div class="out-row-title">Backlog Prioritization by Theme</div><div class="out-row-body"><strong>P1 &mdash; Sprint 1 (Must Have):</strong> iAM integration, SSO authentication, core payment flow, case tracking foundation</div></div><div class="out-row"><div class="out-row-title">Top 3 Risk Flags</div><div class="out-row-body"><div style='color:#9a3412;margin-bottom:6px;'>&#9888; <strong>iAM Business Rules Not Finalized (Showstopper)</strong> &mdash; Blocks Sprint 1 development</div><div style='color:#9a3412;margin-bottom:6px;'>&#9888; <strong>Salesforce Integration Contract Not Defined</strong> &mdash; Case tracking cannot be completed</div><div style='color:#9a3412;'>&#9888; <strong>Missing Acceptance Criteria Across Backlog</strong> &mdash; High risk of rework during SIT/UAT</div></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or sprint planning. Attach requirement docs + product backlog.</p>
+        </div>
+        <div class="card-section">
+          <div class="prompt-label">Template</div>
+          <div class="prompt-block">You are a [role, e.g., Senior Business Analyst and PMO].
+Analyze the attached backlog and requirement documents for [Project Name]. Identify gaps and prioritization issues.
+Attach: [requirement documents + product backlog items].
+Flag vague requirements and missing acceptance criteria. [Director-level / Dev-team-facing] tone.
+Output:
+Gap analysis | Backlog by theme with priority | Top 3 risk flags
+Evaluation: Verify flagged gaps align with original scope. Identify any Sprint 1 blockers.</div>
+          <div class="prompt-label">Full example</div>
+          <div class="prompt-block">You are a Senior Business Analyst and PMO with 10+ years of enterprise software delivery experience.
+Analyze the attached backlog and requirement documents for the Super App Phase 2 project (Digital Payments module).
+Attach: the BRD (v2.1) and the 47-item product backlog with partial acceptance criteria.
+Flag vague requirements and missing acceptance criteria. Dev-team-facing, actionable tone.
+Output:
+Gap analysis | Backlog by theme with priority | Top 3 risk flags
+Evaluation: Verify flagged gaps align with original scope. Identify any Sprint 1 blockers.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card s11 -->
+    <div class="card" id="s11">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-left">
+          <div class="card-title">Generate RAID Log from Project Documents</div>
+          <div class="card-role">Identify, structure, and maintain Risks, Assumptions, Issues &amp; Dependencies</div>
+          <div class="card-badges">
+            <span class="badge specific">Specific</span>
+            <span class="badge heavy">Heavy context</span>
+            <span class="badge tools">ChatGPT · Claude</span>
+          </div>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-section">
+          <div class="io-grid">
+            <div class="io-col">
+              <h4>Input</h4>
+              <ul>
+                <li>Project plan &amp; milestone tracker</li>
+                <li>Meeting notes / MoM documents (last 2–4 weeks)</li>
+                <li>Latest status report</li>
+              </ul>
+              <div class="tip-box">💡 The more meeting notes you attach, the more issues and dependencies AI will surface.</div>
+            </div>
+            <div class="io-col">
+              <h4>Output</h4>
+              <ul>
+                <li>Structured RAID log (Risks, Assumptions, Issues, Dependencies)</li>
+                <li>Severity and priority rating for each item</li>
+                <li>Recommended owners and mitigation actions</li>
+              </ul>
+            </div>
+          </div>
+        
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">RAID LOG &mdash; SuperApp Project</div>
+            <div class="out-row"><div class="out-row-title">RAID Log</div><div class="out-row-body">Structured log generated covering: R-01 Service Cloud API readiness (High), R-02 Phase 2 contract delay (High), R-03 iAM business rules undefined (High), A-01 All Phase 1 UATs completed, A-02 Historical data availability assumed, I-01 SSO testing blocked, D-01 Salesforce integration dependency.</div></div><div class="out-row"><div class="out-row-title">RAID Quality Review</div><div class="out-row-body"><strong>Items with No Clear Owner:</strong> None identified.<br><strong>Items with Weak Mitigation (Require Further Action):</strong><br>A-02 Historical Data Sufficiency &bull; A-03 E-Tax/E-Invoice Business Value &bull; R-04 ETA &amp; Real-Time Tracking Feasibility</div></div><div class="out-row"><div class="out-row-title">Showstoppers for Sprint 1</div><div class="out-row-body">R-01 Service Cloud API Readiness &bull; R-03 iAM Business Rules &bull; I-01 SSO Testing Blocked</div></div>
+          </div>
+        </div>
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or after major milestones. Attach project plan + meeting notes + status report.</p>
+        </div>
+        <div class="card-section">
+          <div class="prompt-label">Template</div>
+          <div class="prompt-block">You are a [role, e.g., Senior PMO Risk Analyst].
+Review the attached documents for [Project Name] and generate a complete RAID log.
+Attach: [project plan + meeting notes (last 2–4 weeks) + latest status report].
+Categorize each item as Risk/Assumption/Issue/Dependency. Rate severity (H/M/L). Assign recommended owners. Factual tone.
+Output: RAID table — ID | Category | Description | Severity | Owner | Mitigation/Action | Status
+Evaluation: Verify each item references a source document. Flag items with no clear owner or mitigation.</div>
+          <div class="prompt-label">Full example</div>
+          <div class="prompt-block">You are a Senior PMO Risk Analyst with expertise in RAID management for IT projects.
+Review the attached project documents for the Super App project and generate a complete RAID log.
+Attach: the project plan, MoM from Weeks 15–18, and the Week 18 status report.
+Categorize each item as Risk/Assumption/Issue/Dependency. Rate severity (H/M/L). Assign recommended owners. Factual tone.
+Output: RAID table — ID | Category | Description | Severity | Owner | Mitigation | Status
+Evaluation: Verify each item references a source document. Flag items with no clear owner or mitigation.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card s12 -->
+    <div class="card" id="s12">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-left">
+          <div class="card-title">Stakeholder Register &amp; Map</div>
+          <div class="card-role">Map influence, tailor communication, and keep stakeholders engaged</div>
+          <div class="card-badges">
+            <span class="badge specific">Specific</span>
+            <span class="badge heavy">Heavy context</span>
+            <span class="badge tools">ChatGPT · Claude</span>
+          </div>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-section">
+          <div class="io-grid">
+            <div class="io-col">
+              <h4>Input</h4>
+              <ul>
+                <li>Project charter (stakeholder section)</li>
+                <li>Org chart / stakeholder directory</li>
+                <li>Any known stakeholder concerns or history</li>
+              </ul>
+              <div class="tip-box">💡 Include roles and reporting lines — AI classifies influence/interest more accurately.</div>
+            </div>
+            <div class="io-col">
+              <h4>Output</h4>
+              <ul>
+                <li>Stakeholder register with roles, interests &amp; influence level</li>
+                <li>Influence-Interest 2×2 map (classify &amp; manage)</li>
+                <li>Recommended engagement strategy per group</li>
+              </ul>
+            </div>
+          </div>
+        
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">STAKEHOLDER REGISTER &mdash; SuperApp Project</div>
+            <div class="out-row"><div class="out-row-title">Influence&ndash;Interest Matrix</div><div class="out-row-body"><strong>Quadrant A &mdash; Manage Closely (High Influence / High Interest):</strong><br>Executive Sponsor &bull; SuperApp Product Owner &bull; IT Management &bull; Service Cloud Team</div></div><div class="out-row"><div class="out-row-title">Engagement Approach</div><div class="out-row-body">Steering Committee &bull; Weekly executive status reporting &bull; Decision and escalation management &bull; Scope and roadmap approvals</div></div><div class="out-row"><div class="out-row-title">Top 3 Engagement Priorities</div><div class="out-row-body">1. <strong>Executive Sponsor:</strong> Monthly steerco &mdash; escalate key decisions within 5 days.<br>2. <strong>IT / Service Cloud:</strong> Weekly sync &mdash; track API readiness and dependencies.<br>3. <strong>Operations / Finance:</strong> Bi-weekly workshop &mdash; secure UAT / Go-Live sign-off.</div></div>
+          </div>
+        </div>
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or when the team changes. Attach project charter + org chart.</p>
+        </div>
+        <div class="card-section">
+          <div class="prompt-label">Template</div>
+          <div class="prompt-block">You are a [role, e.g., Senior PMO Stakeholder Manager].
+Create a stakeholder register and influence-interest map for [Project Name].
+Attach: [project charter + org chart or stakeholder directory]. Classify each stakeholder by influence (H/M/L) and interest (H/M/L). [Director-level] tone.
+Output:
+Stakeholder register: Name | Role | Interest | Influence | Engagement Strategy
+Influence-Interest 2x2 map with quadrant labels
+Top 3 engagement priorities with recommended actions
+Evaluation: Confirm all key decision-makers are included. Flag any stakeholder with HIGH influence but no engagement plan.</div>
+          <div class="prompt-label">Full example</div>
+          <div class="prompt-block">You are a Senior PMO Stakeholder Manager with experience in cross-functional enterprise programs.
+Create a stakeholder register and influence-interest map for the Super App project.
+Attach: the project plan and the org chart (15 stakeholders across Finance, IT, and Operations).
+Classify each stakeholder by influence and interest. Director-level, professional tone.
+Output:
+Stakeholder register: Name | Role | Interest | Influence | Engagement Strategy
+Influence-Interest 2x2 map with quadrant labels
+Top 3 engagement priorities with recommended actions
+Evaluation: Confirm all key decision-makers are included. Flag any stakeholder with HIGH influence but no engagement plan.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card s13 -->
+    <div class="card" id="s13">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-left">
+          <div class="card-title">Stakeholder Communication Plan</div>
+          <div class="card-role">Map influence, tailor communication, and keep stakeholders engaged</div>
+          <div class="card-badges">
+            <span class="badge specific">Specific</span>
+            <span class="badge heavy">Heavy context</span>
+            <span class="badge tools">ChatGPT · Claude</span>
+          </div>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-section">
+          <div class="io-grid">
+            <div class="io-col">
+              <h4>Input</h4>
+              <ul>
+                <li>Stakeholder register (current version)</li>
+                <li>Existing reporting calendar or cadence</li>
+              </ul>
+              <div class="tip-box">💡 Note any stakeholders who previously received insufficient updates — AI flags gaps proactively.</div>
+            </div>
+            <div class="io-col">
+              <h4>Output</h4>
+              <ul>
+                <li>Communication plan table (who, what, when, channel)</li>
+                <li>Key messages per stakeholder group</li>
+                <li>Escalation protocol for unresponsive stakeholders</li>
+              </ul>
+            </div>
+          </div>
+        
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">COMMUNICATION PLAN &mdash; SuperApp Project</div>
+            <div class="out-row"><div class="out-row-title">Key Messages by Stakeholder Group</div><div class="out-row-body"><strong>Executive Stakeholders</strong> (Exec Sponsor, PM Director)<br>Key Messages: Overall project health (Scope, Schedule, Budget, Risks)<br><br><strong>Business &amp; Product Stakeholders</strong> (Product Owner, Operations, Finance)<br>Key Messages: Scope progress against roadmap</div></div><div class="out-row"><div class="out-row-title">Communication Matrix</div><div class="out-row-body"><table class='out-table'><tr><th>Stakeholder</th><th>Type</th><th>Frequency</th><th>Channel</th><th>Owner</th></tr><tr><td>Executive Sponsor</td><td>Status Report</td><td>Monthly</td><td>Email + SteerCo</td><td>PMO Lead</td></tr><tr><td>IT / Service Cloud</td><td>Sync Meeting</td><td>Weekly</td><td>Teams</td><td>PM</td></tr><tr><td>Operations / Finance</td><td>Workshop</td><td>Bi-weekly</td><td>In-person</td><td>PM</td></tr></table></div></div><div class="out-row"><div class="out-row-title">Escalation Protocol</div><div class="out-row-body">If stakeholder is unresponsive after 2 contact attempts within 5 business days: escalate to their line manager. If unresolved after 10 days: raise as RAID issue. PM notifies Executive Sponsor.</div></div>
+          </div>
+        </div>
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">After completing the stakeholder register. Attach register + reporting cadence. Can use output from the Stakeholder Register prompt.</p>
+        </div>
+        <div class="card-section">
+          <div class="prompt-label">Template</div>
+          <div class="prompt-block">You are a [role, e.g., PMO Communication Lead].
+Draft a stakeholder communication plan for [Project Name] covering [timeframe].
+Attach: [stakeholder register + reporting calendar or cadence].
+Tailor message format per stakeholder group (executive vs. team-level). [Formal] tone.
+Output:
+Communication plan: Stakeholder | Message Type | Frequency | Channel | Owner
+Key messages per group (1-2 lines each)
+Escalation protocol for non-responsive stakeholders
+Evaluation: Confirm all HIGH-influence stakeholders have a regular touchpoint. Flag any group with no communication scheduled.</div>
+          <div class="prompt-label">Full example</div>
+          <div class="prompt-block">You are an experienced PMO Communication Lead.
+Draft a stakeholder communication plan for the Super App project.
+Attach: the stakeholder register (15 stakeholders) and the existing steering committee cadence.
+Tailor by group: executive (monthly brief), IT (weekly), end users (bi-weekly). Formal tone.
+Output:
+Communication plan: Stakeholder | Message Type | Frequency | Channel | Owner
+Key messages per group (1-2 lines each)
+Escalation protocol for non-responsive stakeholders
+Evaluation: Confirm all HIGH-influence stakeholders have a regular touchpoint. Flag any group with no communication scheduled.</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>AI @ PMO · Prompt Library · Initiation &amp; Planning</footer>
+
+<script>
+function toggle(header) { header.closest('.card').classList.toggle('open'); }
+function togglePhase(id) { document.getElementById(id).classList.toggle('open'); }
+document.addEventListener('click', e => {
+  const a = e.target.closest('.phase-subs a');
+  if (!a) return;
+  e.preventDefault();
+  const t = document.querySelector(a.getAttribute('href'));
+  if (t) t.scrollIntoView({ behavior:'smooth', block:'start' });
+});
+document.querySelectorAll('.card-section').forEach(function(section) {
+  var labels = Array.from(section.querySelectorAll(':scope > .prompt-label'));
+  if (labels.length === 0) return;
+  var grid = document.createElement('div');
+  grid.className = 'prompt-pair-grid';
+  labels.forEach(function(label) {
+    var block = label.nextElementSibling;
+    if (!block || !block.classList.contains('prompt-block')) return;
+    var isTemplate = /^template/i.test(label.textContent.trim());
+    var col = document.createElement('div');
+    col.className = 'prompt-col';
+    if (isTemplate) {
+      var remark = document.createElement('div');
+      remark.className = 'template-remark';
+      remark.innerHTML = '✏️ <strong>Replace the [ ] parts</strong> with your project details before use.';
+      col.appendChild(remark);
+    }
+    label.textContent = isTemplate
+      ? 'Template — replace the [ ] parts with your project details'
+      : 'Full example — ready to use, attach 2–3 project documents';
+    if (isTemplate) {
+      block.innerHTML = block.innerHTML.replace(/(\[[^\]\n]+\])/g, '<span class="bh">$1</span>');
+    }
+    var wrapper = document.createElement('div');
+    wrapper.className = 'prompt-wrapper';
+    var cardHeader = document.createElement('div');
+    cardHeader.className = 'prompt-card-header';
+    cardHeader.appendChild(label);
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = 'Copy';
+    (function(b, bl) {
+      b.addEventListener('click', function() {
+        var text = bl.innerText;
+        function onCopied() {
+          b.textContent = '✓ Copied';
+          b.classList.add('copied');
+          setTimeout(function() { b.textContent = 'Copy'; b.classList.remove('copied'); }, 2000);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(onCopied).catch(function() { fallbackCopy(text, onCopied); });
+        } else { fallbackCopy(text, onCopied); }
+      });
+    })(btn, block);
+    cardHeader.appendChild(btn);
+    wrapper.appendChild(cardHeader);
+    wrapper.appendChild(block);
+    col.appendChild(wrapper);
+    grid.appendChild(col);
+  });
+  section.appendChild(grid);
+});
+function fallbackCopy(text, cb) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta);
+  if (cb) cb();
+}
+</script>
+</body>
+</html>

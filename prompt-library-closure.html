@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Closure – Prompt Library</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Segoe UI",Arial,sans-serif;font-size:15px;color:#1e2640;background:#f2f5fa;-webkit-font-smoothing:antialiased;}
+.topnav{background:linear-gradient(120deg,#d6e7f8 0%,#bdd4f4 55%,#b0c9f2 100%);color:#1e2640;display:flex;align-items:center;padding:0 32px;height:56px;gap:0;box-shadow:0 1px 3px rgba(43,52,120,.14);}
+.topnav .brand{font-weight:800;font-size:15px;margin-right:36px;color:#1e2640;letter-spacing:-.01em;}
+.topnav a{color:rgba(30,38,64,.6);text-decoration:none;padding:0 16px;height:56px;display:flex;align-items:center;font-size:13.5px;font-weight:500;transition:color .15s,background .15s;}
+.topnav a:hover{color:#1e2640;background:rgba(43,52,120,.07);}
+.topnav a.active{color:#2B3478;font-weight:600;background:rgba(39,82,224,.1);border-bottom:2px solid #2752E0;}
+.wrapper{display:flex;min-height:calc(100vh - 56px);}
+.sidebar{width:256px;flex-shrink:0;background:linear-gradient(180deg,#d4e6f7 0%,#e2eff8 40%,#edf4fb 100%);border-right:1px solid rgba(43,52,120,.1);position:sticky;top:0;height:calc(100vh - 56px);overflow-y:auto;}
+.sidebar .section-label{display:none;}
+.content{flex:1;padding:44px clamp(24px,4%,56px) 64px clamp(24px,4%,56px);max-width:100%;background:#fff;}
+h1{font-size:1.85rem;font-weight:800;color:#1e2640;margin-bottom:6px;letter-spacing:-.03em;}
+.subtitle{color:#5280CC;font-size:13.5px;font-style:italic;margin-bottom:36px;opacity:.9;}
+h2{font-size:1.1rem;font-weight:700;color:#2B3478;margin:0 0 20px;padding-bottom:10px;border-bottom:1.5px solid #45C8F0;letter-spacing:-.01em;}
+.card{border:1px solid rgba(43,52,120,.09);border-radius:16px;margin-bottom:10px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(43,52,120,.05),0 1px 2px rgba(0,0,0,.03);transition:box-shadow .2s,border-color .2s;}
+.card:hover{box-shadow:0 4px 16px rgba(43,52,120,.1);border-color:rgba(43,52,120,.14);}
+.card-header{padding:18px 22px;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;background:#fff;transition:background .12s;}
+.card-header:hover{background:#fafbff;}
+.card-header-left{flex:1;}
+.card-title{font-size:.93rem;font-weight:700;color:#1e2640;margin-bottom:3px;letter-spacing:-.01em;}
+.card-role{font-size:12px;color:#94a3b8;font-style:italic;}
+.card-badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px;}
+.badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700;white-space:nowrap;letter-spacing:.01em;}
+.badge.generic{background:#dcfce7;color:#166534;}
+.badge.specific{background:#fff7ed;color:#9a3412;}
+.badge.light{background:#e0f7ff;color:#0369a1;}
+.badge.heavy{background:#eef0fa;color:#2B3478;}
+.badge.tools{background:#f0f5ff;color:#2752E0;border:1px solid #c7d9ff;}
+.chevron{font-size:14px;color:#c8cfd8;flex-shrink:0;margin-top:4px;transition:transform .2s;}
+.card.open .chevron{transform:rotate(180deg);}
+.card-body{display:none;border-top:1px solid rgba(43,52,120,.07);}
+.card.open .card-body{display:block;}
+.card-section{padding:18px 22px;border-bottom:1px solid rgba(43,52,120,.05);}
+.card-section:last-child{border-bottom:none;}
+.card-section h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.09em;color:#5a6490;font-weight:700;margin-bottom:10px;}
+.card-section ul{padding-left:18px;}
+.card-section ul li{margin-bottom:6px;font-size:13.5px;line-height:1.65;color:#374060;}
+.tip-box{background:#fffdf0;border-left:2px solid #f6c90e;padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px;color:#78610a;margin-top:10px;}
+.prompt-pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+@media(max-width:700px){.prompt-pair-grid{grid-template-columns:1fr;}}
+.prompt-col{display:flex;flex-direction:column;gap:8px;}
+.prompt-wrapper{display:flex;flex-direction:column;flex:1;border:1px solid rgba(43,52,120,.1);border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(43,52,120,.04);}
+.prompt-card-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 14px;background:#f5f8ff;border-bottom:1px solid rgba(43,52,120,.08);}
+.prompt-label{font-size:12px;font-weight:600;color:#2752E0;font-style:italic;margin:0;text-transform:none;letter-spacing:0;flex:1;}
+.prompt-block{background:#fff;color:#2a3350;padding:14px 16px;font-family:"Segoe UI",Arial,sans-serif;font-size:12.5px;line-height:1.8;white-space:pre-wrap;word-break:break-word;flex:1;border:none;margin:0;}
+.copy-btn{flex-shrink:0;background:#2752E0;color:#fff;border:none;padding:4px 13px;border-radius:8px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:"Segoe UI",Arial,sans-serif;transition:background .15s,box-shadow .15s;white-space:nowrap;}
+.copy-btn:hover{background:#1d3cc0;box-shadow:0 2px 8px rgba(39,82,224,.3);}
+.copy-btn.copied{background:#16a34a;box-shadow:none;}
+.bh{color:#2752E0;font-weight:700;}
+.template-remark{background:#fffbf0;border-left:2px solid #f59e0b;padding:7px 12px;font-size:12px;color:#92400e;border-radius:0 8px 8px 0;}
+.io-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:700px){.io-grid{grid-template-columns:1fr;}}
+.io-col{background:#fafbfd;border:1px solid rgba(43,52,120,.07);border-radius:10px;padding:16px 18px;}
+.io-col h4{margin-bottom:10px;}
+footer{text-align:center;padding:20px;font-size:12px;color:#b0bacf;border-top:1px solid rgba(43,52,120,.07);}
+.nav-item{position:relative;display:flex;align-items:center;}
+.nav-item>a{color:rgba(30,38,64,.6);text-decoration:none;padding:0 16px;height:56px;display:flex;align-items:center;font-size:13.5px;font-weight:500;transition:color .15s,background .15s;white-space:nowrap;}
+.nav-item:hover>a{color:#1e2640;background:rgba(43,52,120,.07);}
+.nav-item.active>a{color:#2B3478;font-weight:600;background:rgba(39,82,224,.1);border-bottom:2px solid #2752E0;}
+.nav-dropdown{display:none;position:absolute;top:56px;left:0;background:#fff;border:1px solid rgba(43,52,120,.1);border-radius:0 0 12px 12px;min-width:220px;z-index:100;box-shadow:0 8px 28px rgba(43,52,120,.14);}
+.nav-item:hover .nav-dropdown{display:block;}
+.nav-dropdown a{display:flex;align-items:center;padding:10px 18px;color:#374060;text-decoration:none;font-size:13px;transition:background .1s;border:none;height:auto;}
+.nav-dropdown a:hover{background:#f0f5ff;color:#2752E0;}
+.phase-item{border-bottom:1px solid rgba(43,52,120,.1);}
+.phase-item:last-child{border-bottom:none;}
+.phase-header{display:flex;justify-content:space-between;align-items:center;padding:15px 22px;cursor:pointer;color:#1e2640;font-size:14px;font-weight:700;letter-spacing:-.01em;transition:color .12s,background .12s;user-select:none;}
+.phase-header:hover{background:rgba(43,52,120,.05);color:#2752E0;}
+.phase-item.open>.phase-header{color:#2752E0;background:rgba(39,82,224,.07);}
+.phase-chevron{font-size:18px;font-style:normal;transition:transform .2s;flex-shrink:0;color:rgba(30,38,64,.3);line-height:1;}
+.phase-item.open .phase-chevron{transform:rotate(90deg);}
+.phase-subs{display:none;background:rgba(255,255,255,.45);border-top:1px solid rgba(43,52,120,.07);}
+.phase-item.open .phase-subs{display:block;}
+.sidebar a.sub{display:flex;align-items:center;gap:6px;padding:9px 22px 9px 28px;color:#374060;text-decoration:none;font-size:13px;border-left:none;transition:color .1s,background .1s;}
+.sidebar a.sub::before{content:'›';font-size:16px;color:rgba(43,52,120,.3);flex-shrink:0;line-height:1;}
+.sidebar a.sub:hover{color:#2752E0;background:rgba(39,82,224,.06);}
+.sidebar a.sub:hover::before{color:#2752E0;}
+a.phase-header{text-decoration:none;}
+
+    /* ── OUTPUT EXAMPLE ── */
+    .output-example-section{background:linear-gradient(135deg,#f6f9ff 0%,#eef4fd 100%);border-top:2px solid #45C8F0;padding:18px 22px;}
+    .output-label{font-size:12.5px;font-style:italic;color:#5a6490;margin-bottom:8px;letter-spacing:.02em;text-transform:none;font-weight:600;}
+    .output-box{background:#fff;border:1px solid rgba(43,52,120,.1);border-radius:10px;padding:16px 18px;}
+    .output-title{font-size:13.5px;font-weight:800;color:#1a3a5c;margin-bottom:12px;letter-spacing:-.01em;}
+    .out-row{margin-bottom:12px;}
+    .out-row:last-child{margin-bottom:0;}
+    .out-row-title{font-size:10px;font-weight:700;color:#2B3478;text-transform:uppercase;letter-spacing:.09em;margin-bottom:4px;}
+    .out-row-body{font-size:12.5px;color:#374060;line-height:1.7;}
+    .out-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px;}
+    .out-table th{background:#f0f5ff;color:#2B3478;font-weight:700;padding:6px 10px;text-align:left;font-size:11px;border:1px solid rgba(43,52,120,.1);}
+    .out-table td{padding:6px 10px;border:1px solid rgba(43,52,120,.07);color:#374060;vertical-align:top;}
+    .out-table tr:nth-child(even) td{background:#fafbff;}
+    .cp-tag{background:#2752E0;color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px;}
+    .out-img{width:100%;border-radius:6px;border:1px solid rgba(43,52,120,.1);display:block;}
+    .out-img-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+    .out-img-wrap{background:#f8faff;border-radius:8px;padding:4px;border:1px solid rgba(43,52,120,.07);}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="brand">AI @ PMO</span>
+  <a href="index.html">AI Guideline</a>
+  <div class="nav-item active">
+    <a href="prompt-library-initiation.html">Prompt Library ▾</a>
+    <div class="nav-dropdown">
+      <a href="prompt-library-initiation.html">Initiation &amp; Planning</a>
+      <a href="prompt-library-execution.html">Execution</a>
+      <a href="prompt-library-monitoring.html">Monitoring &amp; Controlling</a>
+      <a href="prompt-library-closure.html">Closure</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrapper">
+  <nav class="sidebar">
+    <!-- Phase 1 -->
+    <div class="phase-item" id="ph1">
+      <a class="phase-header" href="prompt-library-initiation.html">
+        Initiation &amp; Planning
+        <i class="phase-chevron">›</i>
+      </a>
+    </div>
+    <!-- Phase 2 -->
+    <div class="phase-item" id="ph2">
+      <a class="phase-header" href="prompt-library-execution.html">
+        Execution
+        <i class="phase-chevron">›</i>
+      </a>
+    </div>
+    <!-- Phase 3 -->
+    <div class="phase-item" id="ph3">
+      <a class="phase-header" href="prompt-library-monitoring.html">
+        Monitoring &amp; Controlling
+        <i class="phase-chevron">›</i>
+      </a>
+    </div>
+    <!-- Phase 4: CURRENT -->
+    <div class="phase-item open" id="ph4">
+      <div class="phase-header" onclick="togglePhase('ph4')">
+        Closure
+        <i class="phase-chevron">›</i>
+      </div>
+      <div class="phase-subs">
+        <a class="sub" href="#s29">Lessons Learned Report</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="content">
+    <h1>Closure</h1>
+    <p class="subtitle">Capture lessons learned and turn them into insights for the next project.</p>
+
+    <!-- Card s29 -->
+    <div class="card" id="s29">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-left">
+          <div class="card-title">Lessons Learned Report</div>
+          <div class="card-role">Extract insights and best practices to improve future projects</div>
+          <div class="card-badges">
+            <span class="badge specific">Specific</span>
+            <span class="badge heavy">Heavy context</span>
+            <span class="badge tools">ChatGPT · Claude · Gemini</span>
+          </div>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-section">
+          <div class="io-grid">
+            <div class="io-col">
+              <h4>Input</h4>
+              <ul>
+                <li>Project Closure Report (scope, budget &amp; timeline)</li>
+                <li>RAID Log (complete history, incl. resolved items)</li>
+                <li>Team Retrospective Survey (min. 5 responses)</li>
+              </ul>
+              <div class="tip-box">💡 If unavailable, use status reports + meeting notes as a substitute for the closure report.</div>
+            </div>
+            <div class="io-col">
+              <h4>Output</h4>
+              <ul>
+                <li>Lessons Learned report (by People / Process / Technology)</li>
+                <li>Root cause analysis with recurrence risk rating</li>
+                <li>Top 5 recommendations for the next project</li>
+              </ul>
+            </div>
+          </div>
+        
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">LESSONS LEARNED &mdash; DM&amp;A Phase 2 Project</div>
+            <div class="out-row"><div class="out-row-title">Executive Summary</div><div class="out-row-body">Phase 2 closed on all three formal KPIs: delivered on time (16 months, Meet Expectation), within 5% budget variance (Exceed Expectation), and with a customer satisfaction score of 8.48/10 (Very Good).</div></div><div class="out-row"><div class="out-row-title">What Went Well</div><div class="out-row-body"><strong>People:</strong> DG roles fully defined across 32 domains; Change Management activated newsletters, knowledge sessions, a Bootcamp, and four Learning+ courses.<br><strong>Process:</strong> Phased &ldquo;Think Big, Start Small, Grow Fast&rdquo; structure; batched dashboard rollouts with controlled go-live; no-cost change request absorption.<br><strong>Technology:</strong> Unified Data Lake + centralised Data Warehouse; standardised pipeline templates; ML model live 1 Sep 2023; consistent cross-BU dashboard metrics.</div></div><div class="out-row"><div class="out-row-title">Areas for Improvement</div><div class="out-row-body">Timeline extended from 12&rarr;16 months &mdash; root cause not documented.<br>ML model process integration incomplete &mdash; explicitly deferred to Phase 3.<br>Usage dipped during Nov&ndash;Dec 2023 issue resolution period.<br>No post-Phase 2 DG Maturity re-assessment score documented.</div></div><div class="out-row"><div class="out-row-title">Top 5 Recommendations</div><div class="out-row-body">1. Document root causes of timeline extension before Phase 3 baselining.<br>2. Prioritise end-to-end ML forecasting process integration as a Phase 3 day-one workstream.<br>3. Introduce a formal hypercare period between dashboard go-live and project phase close.<br>4. Conduct a post-Phase 2 DG Maturity re-assessment and establish a Phase 3 target state.<br>5. Formalise dashboard adoption tracking as an ongoing programme KPI.</div></div>
+          </div>
+        </div>
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project closure or end-of-phase review. Attach closure report + RAID + retrospective survey.</p>
+        </div>
+        <div class="card-section">
+          <div class="prompt-label">Template</div>
+          <div class="prompt-block">You are a [role, e.g., Senior PMO Retrospective Facilitator].
+Review the attached documents and generate a Lessons Learned report for [Project Name].
+Attach: [project closure report + RAID log + retrospective survey responses].
+Evidence-based only. [1-2] sentences per finding. [Director-level / Team-facing] tone. No speculation.
+Output:
+Executive Summary (2–3 sentences)
+What Went Well (by People / Process / Technology)
+Areas for Improvement (with root cause)
+Top 5 Recommendations
+Evaluation: Every finding must map to a source document. Flag any gap where evidence is insufficient.</div>
+          <div class="prompt-label">Full example</div>
+          <div class="prompt-block">You are a Senior PMO Retrospective Facilitator with 10+ years of post-project review experience.
+Generate a formal Lessons Learned Report for DM&A Phase 2 based exclusively on content found in the attached closure deck.
+Attach: The project closure report.
+Evidence-based only. 1–2 sentences per finding. Professional, Director-level tone. No speculation.
+Output:
+Executive Summary | What Went Well (People/Process/Technology) | Areas for Improvement | Top 5 Recommendations
+Evaluation: Every finding must cite a source. Flag any finding without supporting evidence.</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>AI @ PMO · Prompt Library · Closure</footer>
+
+<script>
+function toggle(header) { header.closest('.card').classList.toggle('open'); }
+function togglePhase(id) { document.getElementById(id).classList.toggle('open'); }
+document.addEventListener('click', e => {
+  const a = e.target.closest('.phase-subs a');
+  if (!a) return;
+  e.preventDefault();
+  const t = document.querySelector(a.getAttribute('href'));
+  if (t) t.scrollIntoView({ behavior:'smooth', block:'start' });
+});
+document.querySelectorAll('.card-section').forEach(function(section) {
+  var labels = Array.from(section.querySelectorAll(':scope > .prompt-label'));
+  if (labels.length === 0) return;
+  var grid = document.createElement('div');
+  grid.className = 'prompt-pair-grid';
+  labels.forEach(function(label) {
+    var block = label.nextElementSibling;
+    if (!block || !block.classList.contains('prompt-block')) return;
+    var isTemplate = /^template/i.test(label.textContent.trim());
+    var col = document.createElement('div');
+    col.className = 'prompt-col';
+    if (isTemplate) {
+      var remark = document.createElement('div');
+      remark.className = 'template-remark';
+      remark.innerHTML = '✏️ <strong>Replace the [ ] parts</strong> with your project details before use.';
+      col.appendChild(remark);
+    }
+    label.textContent = isTemplate
+      ? 'Template — replace the [ ] parts with your project details'
+      : 'Full example — ready to use, attach 2–3 project documents';
+    if (isTemplate) {
+      block.innerHTML = block.innerHTML.replace(/(\[[^\]\n]+\])/g, '<span class="bh">$1</span>');
+    }
+    var wrapper = document.createElement('div');
+    wrapper.className = 'prompt-wrapper';
+    var cardHeader = document.createElement('div');
+    cardHeader.className = 'prompt-card-header';
+    cardHeader.appendChild(label);
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = 'Copy';
+    (function(b, bl) {
+      b.addEventListener('click', function() {
+        var text = bl.innerText;
+        function onCopied() {
+          b.textContent = '✓ Copied';
+          b.classList.add('copied');
+          setTimeout(function() { b.textContent = 'Copy'; b.classList.remove('copied'); }, 2000);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(onCopied).catch(function() { fallbackCopy(text, onCopied); });
+        } else { fallbackCopy(text, onCopied); }
+      });
+    })(btn, block);
+    cardHeader.appendChild(btn);
+    wrapper.appendChild(cardHeader);
+    wrapper.appendChild(block);
+    col.appendChild(wrapper);
+    grid.appendChild(col);
+  });
+  section.appendChild(grid);
+});
+function fallbackCopy(text, cb) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta);
+  if (cb) cb();
+}
+</script>
+</body>
+</html>
