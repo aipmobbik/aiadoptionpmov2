@@ -82,6 +82,9 @@ footer{text-align:center;padding:20px;font-size:12px;color:#b0bacf;border-top:1p
 .sidebar a.sub:hover{color:#2752E0;background:rgba(39,82,224,.06);}
 .sidebar a.sub:hover::before{color:#2752E0;}
 a.phase-header{text-decoration:none;}
+.content-group-label{display:flex;align-items:center;gap:10px;margin:32px 0 10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#94a3c0;}
+.content-group-label::after{content:'';flex:1;height:1px;background:rgba(43,52,120,.09);}
+.content-group-label:first-child{margin-top:0;}
 .group-item{border-bottom:1px solid rgba(43,52,120,.06);}
 .group-item:last-child{border-bottom:none;}
 .group-header{display:flex;justify-content:space-between;align-items:center;padding:8px 14px 8px 22px;cursor:pointer;color:#6b7699;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;transition:color .12s,background .12s;user-select:none;}
@@ -205,6 +208,8 @@ a.phase-header{text-decoration:none;}
     <p class="subtitle">Set the right foundation — define scope, build schedules, and align stakeholders before work begins.</p>
 
     <!-- Card s6 -->
+    
+    <div class="content-group-label" style="margin-top:0">Project Definition &amp; Scope</div>
     <div class="card" id="s6">
       <div class="card-header" onclick="toggle(this)">
         <div class="card-header-left">
@@ -248,13 +253,6 @@ a.phase-header{text-decoration:none;}
           <h4>When to use</h4>
           <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project initiation — paste your project brief directly. No documents required for the template version.</p>
         </div>
-        <div class="card-section output-example-section">
-          <div class="output-label">Generated Output Example</div>
-          <div class="output-box">
-            <div class="output-title">PROJECT CHARTER &mdash; CBS</div>
-            <div class="out-row"><div class="out-row-title">Executive Summary</div><div class="out-row-body">This charter authorises Bluebik Group (BBIK) to deliver a 12-month PMO service governing the IT integration programme across five subsidiaries. The PMO will provide project governance, cross-functional coordination, risk management, change management, and stakeholder communication &mdash; ensuring delivery on time, within budget, and to agreed quality standards.</div></div><div class="out-row"><div class="out-row-title">Objective</div><div class="out-row-body">1. Establish PMO governance across IT landscape<br>2. Achieve IT integration readiness by 15-Nov-2025<br>3. Reduce milestone slippage: &ge;90% on-time delivery across all workstreams</div></div><div class="out-row"><div class="out-row-title">Scope In/Out</div><div class="out-row-body"><span style='color:#166534'>&#10003; In:</span> Governance, Cross-functional PMO, Integration Planning, Risk, Change Mgmt<br><span style='color:#9a3412'>&#10007; Out:</span> IT development/coding, vendor procurement, HR headcount decisions, legal compliance</div></div><div class="out-row"><div class="out-row-title">Stakeholder RACI</div><div class="out-row-body">CTO &mdash; Accountable (Sponsor)<br>PMO Director &mdash; Responsible<br>PMO Manager &mdash; Responsible<br>IT Leadership &mdash; Consult</div></div><div class="out-row"><div class="out-row-title">High-Level Milestones</div><div class="out-row-body">M1 Kick-off &amp; Governance Setup &nbsp;&bull;&nbsp; Feb 2025<br>M3 Master Integration Plan &nbsp;&bull;&nbsp; Mar 2025<br>M5 Phase 1 Foundation Delivery &nbsp;&bull;&nbsp; Apr&ndash;Jun 2025<br>M9 Go-Live Readiness Review &nbsp;&bull;&nbsp; Nov 2025</div></div><div class="out-row"><div class="out-row-title">Top 3 Risks &amp; Assumptions</div><div class="out-row-body">1. Stakeholder misalignment &rarr; 4&ndash;8 wk Go-Live buffer<br>2. BSS/OSS hidden dependencies &rarr; AS-IS mapping in M2; 15% schedule buffer<br>3. Key PMO resource attrition &rarr; Succession plan &amp; knowledge docs assumed pre-approved</div></div>
-          </div>
-        </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
           <div class="prompt-block">You are a [role, e.g., Senior PMO Specialist].
@@ -272,158 +270,16 @@ Scope (In): PMO Service. Flag any information gap.
 Output: Full Charter: Objectives | Scope In/Out | RACI | Milestones | Budget | Risks & Assumptions | Success Criteria | Sign-off table.
 Evaluation: Verify all sections complete. Flag assumptions without a source. Highlight top 3 risks to Go-Live.</div>
         </div>
-      </div>
-    </div>
-
-    <!-- Card s7 -->
-    <div class="card" id="s7">
-      <div class="card-header" onclick="toggle(this)">
-        <div class="card-header-left">
-          <div class="card-title">Generate a Project Schedule</div>
-          <div class="card-role">Help PMOs structure, prioritize, and track project activities faster</div>
-          <div class="card-badges">
-            <span class="badge specific">Specific</span>
-            <span class="badge heavy">Heavy context</span>
-            <span class="badge tools">ChatGPT · Claude</span>
-          </div>
-        </div>
-        <span class="chevron">▼</span>
-      </div>
-      <div class="card-body">
-        <div class="card-section">
-          <div class="io-grid">
-            <div class="io-col">
-              <h4>Input</h4>
-              <ul>
-                <li>Project charter (objectives, scope, phases)</li>
-                <li>Team availability / capacity data</li>
-                <li>WBS or deliverable list (optional)</li>
-              </ul>
-              <div class="tip-box">💡 Include phase durations and known dependencies — AI builds a more realistic critical path.</div>
-            </div>
-            <div class="io-col">
-              <h4>Output</h4>
-              <ul>
-                <li>Structured schedule with phases &amp; milestones</li>
-                <li>Task list with owners, durations &amp; dependencies</li>
-                <li>Critical path highlights &amp; schedule risks</li>
-              </ul>
-            </div>
-          </div>
-        
-        
-      </div>
-        <div class="card-section">
-          <h4>When to use</h4>
-          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project kickoff or phase start. Attach charter + team roster.</p>
-        </div>
         <div class="card-section output-example-section">
           <div class="output-label">Generated Output Example</div>
           <div class="output-box">
-            <div class="output-title">PROJECT SCHEDULE &mdash; DM&amp;A Phase 3</div>
-            <div class="out-row"><div class="out-row-title">Phase Timeline</div><div class="out-row-body"><table class='out-table'><tr><th>Workstream</th><th>Weeks</th><th>Key Deliverables</th></tr><tr><td>Data Governance</td><td>Wk 1&ndash;43</td><td>Purview setup, Data Dictionary (F&A), training &amp; KT</td></tr><tr><td>Data Visualization</td><td>Wk 1&ndash;35</td><td>UATs &rarr; 3 dashboards &rarr; SIT &rarr; UAT &rarr; Power BI publish <span class='cp-tag'>CP</span></td></tr><tr><td>Machine Learning</td><td>Wk 1&ndash;39</td><td>ML#3 Sales Forecast + ML#4 Demand Forecast &rarr; deploy <span class='cp-tag'>CP</span></td></tr><tr><td>Data Lake / Cloud</td><td>Wk 1&ndash;43</td><td>Pipelines, ETL ~300 tables, monitoring, security <span class='cp-tag'>CP</span></td></tr><tr><td>PMO</td><td>Wk 1&ndash;43</td><td>Weekly reports &bull; SteerCo &bull; KPI Mo. 5 &amp; 10 &bull; closure</td></tr></table></div></div><div class="out-row"><div class="out-row-title">Critical Path</div><div class="out-row-body">Kick-off &rarr; Req. gathering &amp; SKU workshops &rarr; Model spec &amp; EDA &rarr; DV &amp; ML development &rarr; SIT &rarr; UAT &rarr; Publish &amp; deploy &rarr; KT &amp; handovers &rarr; Closure (Nov 2024)</div></div><div class="out-row"><div class="out-row-title">Top 3 Schedule Risks</div><div class="out-row-body">1. UAT delays &mdash; rework adds &ge;2 wks per workstream. Fix: 5-day defect SLA, dedicated UAT lead.<br>2. DL/CP pipeline readiness blocks DV &amp; ML simultaneously. Fix: weekly pipeline health check.<br>3. Stakeholder availability &mdash; SKU workshops need 5 business leads at once. Fix: lock dates Week 1.</div></div>
+            <div class="output-title">PROJECT CHARTER &mdash; CBS</div>
+            <div class="out-row"><div class="out-row-title">Executive Summary</div><div class="out-row-body">This charter authorises Bluebik Group (BBIK) to deliver a 12-month PMO service governing the IT integration programme across five subsidiaries. The PMO will provide project governance, cross-functional coordination, risk management, change management, and stakeholder communication &mdash; ensuring delivery on time, within budget, and to agreed quality standards.</div></div><div class="out-row"><div class="out-row-title">Objective</div><div class="out-row-body">1. Establish PMO governance across IT landscape<br>2. Achieve IT integration readiness by 15-Nov-2025<br>3. Reduce milestone slippage: &ge;90% on-time delivery across all workstreams</div></div><div class="out-row"><div class="out-row-title">Scope In/Out</div><div class="out-row-body"><span style='color:#166534'>&#10003; In:</span> Governance, Cross-functional PMO, Integration Planning, Risk, Change Mgmt<br><span style='color:#9a3412'>&#10007; Out:</span> IT development/coding, vendor procurement, HR headcount decisions, legal compliance</div></div><div class="out-row"><div class="out-row-title">Stakeholder RACI</div><div class="out-row-body">CTO &mdash; Accountable (Sponsor)<br>PMO Director &mdash; Responsible<br>PMO Manager &mdash; Responsible<br>IT Leadership &mdash; Consult</div></div><div class="out-row"><div class="out-row-title">High-Level Milestones</div><div class="out-row-body">M1 Kick-off &amp; Governance Setup &nbsp;&bull;&nbsp; Feb 2025<br>M3 Master Integration Plan &nbsp;&bull;&nbsp; Mar 2025<br>M5 Phase 1 Foundation Delivery &nbsp;&bull;&nbsp; Apr&ndash;Jun 2025<br>M9 Go-Live Readiness Review &nbsp;&bull;&nbsp; Nov 2025</div></div><div class="out-row"><div class="out-row-title">Top 3 Risks &amp; Assumptions</div><div class="out-row-body">1. Stakeholder misalignment &rarr; 4&ndash;8 wk Go-Live buffer<br>2. BSS/OSS hidden dependencies &rarr; AS-IS mapping in M2; 15% schedule buffer<br>3. Key PMO resource attrition &rarr; Succession plan &amp; knowledge docs assumed pre-approved</div></div>
           </div>
-        </div>
-        <div class="card-section">
-          <div class="prompt-label">Template</div>
-          <div class="prompt-block">You are a [role, e.g., Senior PMO Specialist].
-Create a structured project schedule for [Project Name] covering phases: [list phases].
-Attach: [project charter + team roster or WBS].
-Team capacity: [X members, Y hrs/week]. Flag critical path tasks. [Director-level / Team-facing] tone.
-Output:
-Phase timeline table (Phase | Start | End | Duration)
-Task list (Task | Owner | Duration | Dependencies)
-Critical path with top 3 schedule risks
-Evaluation: Verify all phases from the charter are covered. Flag tasks without owners or missing dependencies.</div>
-          <div class="prompt-label">Full example</div>
-          <div class="prompt-block">You are a Senior PMO Specialist with 10+ years of IT project delivery experience.
-Create a structured project schedule for the ERP Integration project covering phases: Discovery, Design, Build, UAT, and Go-Live.
-The attached deck is the TCP DM&A Phase 3 Kick-off presentation. Use it as the sole source of truth for scope, workstreams, team structure, and timelines.
-Inputs provided: Phase 3 Kick-off deck (attached). Team availability: all members at 40 hrs/week unless stated otherwise.
-Output:
-Phase timeline table (Phase | Start | End | Duration)
-Task list (Task | Owner | Duration | Dependencies)
-Critical path with top 3 schedule risks
-Evaluation: Verify all phases from the charter are covered. Flag tasks without owners or missing dependencies.</div>
         </div>
       </div>
     </div>
 
-    <!-- Card s8 -->
-    <div class="card" id="s8">
-      <div class="card-header" onclick="toggle(this)">
-        <div class="card-header-left">
-          <div class="card-title">Resource Allocation Plan</div>
-          <div class="card-role">Optimize team allocation and forecast capacity gaps before they impact delivery</div>
-          <div class="card-badges">
-            <span class="badge specific">Specific</span>
-            <span class="badge heavy">Heavy context</span>
-            <span class="badge tools">ChatGPT · Claude</span>
-          </div>
-        </div>
-        <span class="chevron">▼</span>
-      </div>
-      <div class="card-body">
-        <div class="card-section">
-          <div class="io-grid">
-            <div class="io-col">
-              <h4>Input</h4>
-              <ul>
-                <li>Project plan (phases &amp; tasks with durations)</li>
-                <li>Team roster with roles &amp; availability (%)</li>
-                <li>Skills matrix (optional but recommended)</li>
-              </ul>
-              <div class="tip-box">💡 Include actual availability %, not just FTE counts — AI flags over-allocation accurately.</div>
-            </div>
-            <div class="io-col">
-              <h4>Output</h4>
-              <ul>
-                <li>Resource allocation matrix (who does what, when)</li>
-                <li>Over-allocation warnings with recommended fixes</li>
-                <li>Skill gap analysis and hiring/contracting flags</li>
-              </ul>
-            </div>
-          </div>
-        
-        
-      </div>
-        <div class="card-section">
-          <h4>When to use</h4>
-          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or when team composition changes. Attach project plan + team roster.</p>
-        </div>
-        <div class="card-section output-example-section">
-          <div class="output-label">Generated Output Example</div>
-          <div class="output-box">
-            <div class="output-title">RESOURCE ALLOCATION PLAN &mdash; SuperApp (MVP 1.1&ndash;1.2)</div>
-            <div class="out-row"><div class="out-row-title">Period</div><div class="out-row-body">21 Nov 2025 &ndash; 4 Jun 2026</div></div><div class="out-row"><div class="out-row-title">Over-Allocation Review</div><div class="out-row-body">No individual resource allocation exceeds 100%.<br>Executive and governance roles remain within advisory capacity:<br>PM (10%) &bull; Tech Lead (20%) &bull; Frontend Senior (50%)</div></div><div class="out-row"><div class="out-row-title">Skill Gaps</div><div class="out-row-body"><strong>BA capacity reduces after May</strong> &mdash; contract 1 Senior BA.<br><strong>Senior BE support ends before stabilization</strong> &mdash; extend or contract 1 Senior BE.</div></div>
-          </div>
-        </div>
-        <div class="card-section">
-          <div class="prompt-label">Template</div>
-          <div class="prompt-block">You are a [role, e.g., Senior PMO Resource Manager].
-Create a resource allocation plan for [Project Name] covering [timeframe].
-Attach: [project plan + team roster with availability % + skills matrix (optional)].
-Flag over-allocation above [X]%. Identify skill gaps. [Director-level / PM-facing] tone.
-Output:
-Resource allocation matrix (Role | Person | Phase | % Allocated | Notes)
-Over-allocation flags with recommended mitigations
-Skill gap summary with hire/contract recommendations
-Evaluation: Verify total allocation per person does not exceed 100%. Flag phases with no assigned resource.</div>
-          <div class="prompt-label">Full example</div>
-          <div class="prompt-block">You are a Senior PMO.
-Create a resource allocation plan for Super App project covering from 21 Nov–4 Jun.
-Attach: the detailed project plan and the team roster (8 resources, varying availability).
-Flag over-allocation above 90%. Identify skill gaps for UAT phase. PM-facing, concise tone.
-Output:
-Resource allocation matrix (Role | Person | Phase | % Allocated | Notes)
-Over-allocation flags with recommended mitigations
-Skill gap summary with hire/contract recommendations
-Evaluation: Verify total allocation per person does not exceed 100%. Flag phases with no assigned resource.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card s10 -->
     <div class="card" id="s10">
       <div class="card-header" onclick="toggle(this)">
         <div class="card-header-left">
@@ -465,13 +321,6 @@ Evaluation: Verify total allocation per person does not exceed 100%. Flag phases
           <h4>When to use</h4>
           <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or sprint planning. Attach requirement docs + product backlog.</p>
         </div>
-        <div class="card-section output-example-section">
-          <div class="output-label">Generated Output Example</div>
-          <div class="output-box">
-            <div class="output-title">REQUIREMENT ANALYSIS &mdash; SuperApp Phase 2</div>
-            <div class="out-row"><div class="out-row-title">Gap Analysis</div><div class="out-row-body">Gaps identified across backlog items including missing acceptance criteria, undefined integration contracts, and unconfirmed business rules.</div></div><div class="out-row"><div class="out-row-title">Backlog Prioritization by Theme</div><div class="out-row-body"><strong>P1 &mdash; Sprint 1 (Must Have):</strong> iAM integration, SSO authentication, core payment flow, case tracking foundation</div></div><div class="out-row"><div class="out-row-title">Top 3 Risk Flags</div><div class="out-row-body"><div style='color:#9a3412;margin-bottom:6px;'>&#9888; <strong>iAM Business Rules Not Finalized (Showstopper)</strong> &mdash; Blocks Sprint 1 development</div><div style='color:#9a3412;margin-bottom:6px;'>&#9888; <strong>Salesforce Integration Contract Not Defined</strong> &mdash; Case tracking cannot be completed</div><div style='color:#9a3412;'>&#9888; <strong>Missing Acceptance Criteria Across Backlog</strong> &mdash; High risk of rework during SIT/UAT</div></div></div>
-          </div>
-        </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
           <div class="prompt-block">You are a [role, e.g., Senior Business Analyst and PMO].
@@ -490,10 +339,166 @@ Output:
 Gap analysis | Backlog by theme with priority | Top 3 risk flags
 Evaluation: Verify flagged gaps align with original scope. Identify any Sprint 1 blockers.</div>
         </div>
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">REQUIREMENT ANALYSIS &mdash; SuperApp Phase 2</div>
+            <div class="out-row"><div class="out-row-title">Gap Analysis</div><div class="out-row-body">Gaps identified across backlog items including missing acceptance criteria, undefined integration contracts, and unconfirmed business rules.</div></div><div class="out-row"><div class="out-row-title">Backlog Prioritization by Theme</div><div class="out-row-body"><strong>P1 &mdash; Sprint 1 (Must Have):</strong> iAM integration, SSO authentication, core payment flow, case tracking foundation</div></div><div class="out-row"><div class="out-row-title">Top 3 Risk Flags</div><div class="out-row-body"><div style='color:#9a3412;margin-bottom:6px;'>&#9888; <strong>iAM Business Rules Not Finalized (Showstopper)</strong> &mdash; Blocks Sprint 1 development</div><div style='color:#9a3412;margin-bottom:6px;'>&#9888; <strong>Salesforce Integration Contract Not Defined</strong> &mdash; Case tracking cannot be completed</div><div style='color:#9a3412;'>&#9888; <strong>Missing Acceptance Criteria Across Backlog</strong> &mdash; High risk of rework during SIT/UAT</div></div></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Card s11 -->
+
+    <div class="content-group-label">Planning &amp; Scheduling</div>
+    <div class="card" id="s7">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-left">
+          <div class="card-title">Generate a Project Schedule</div>
+          <div class="card-role">Help PMOs structure, prioritize, and track project activities faster</div>
+          <div class="card-badges">
+            <span class="badge specific">Specific</span>
+            <span class="badge heavy">Heavy context</span>
+            <span class="badge tools">ChatGPT · Claude</span>
+          </div>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-section">
+          <div class="io-grid">
+            <div class="io-col">
+              <h4>Input</h4>
+              <ul>
+                <li>Project charter (objectives, scope, phases)</li>
+                <li>Team availability / capacity data</li>
+                <li>WBS or deliverable list (optional)</li>
+              </ul>
+              <div class="tip-box">💡 Include phase durations and known dependencies — AI builds a more realistic critical path.</div>
+            </div>
+            <div class="io-col">
+              <h4>Output</h4>
+              <ul>
+                <li>Structured schedule with phases &amp; milestones</li>
+                <li>Task list with owners, durations &amp; dependencies</li>
+                <li>Critical path highlights &amp; schedule risks</li>
+              </ul>
+            </div>
+          </div>
+        
+        
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project kickoff or phase start. Attach charter + team roster.</p>
+        </div>
+        <div class="card-section">
+          <div class="prompt-label">Template</div>
+          <div class="prompt-block">You are a [role, e.g., Senior PMO Specialist].
+Create a structured project schedule for [Project Name] covering phases: [list phases].
+Attach: [project charter + team roster or WBS].
+Team capacity: [X members, Y hrs/week]. Flag critical path tasks. [Director-level / Team-facing] tone.
+Output:
+Phase timeline table (Phase | Start | End | Duration)
+Task list (Task | Owner | Duration | Dependencies)
+Critical path with top 3 schedule risks
+Evaluation: Verify all phases from the charter are covered. Flag tasks without owners or missing dependencies.</div>
+          <div class="prompt-label">Full example</div>
+          <div class="prompt-block">You are a Senior PMO Specialist with 10+ years of IT project delivery experience.
+Create a structured project schedule for the ERP Integration project covering phases: Discovery, Design, Build, UAT, and Go-Live.
+The attached deck is the TCP DM&A Phase 3 Kick-off presentation. Use it as the sole source of truth for scope, workstreams, team structure, and timelines.
+Inputs provided: Phase 3 Kick-off deck (attached). Team availability: all members at 40 hrs/week unless stated otherwise.
+Output:
+Phase timeline table (Phase | Start | End | Duration)
+Task list (Task | Owner | Duration | Dependencies)
+Critical path with top 3 schedule risks
+Evaluation: Verify all phases from the charter are covered. Flag tasks without owners or missing dependencies.</div>
+        </div>
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">PROJECT SCHEDULE &mdash; DM&amp;A Phase 3</div>
+            <div class="out-row"><div class="out-row-title">Phase Timeline</div><div class="out-row-body"><table class='out-table'><tr><th>Workstream</th><th>Weeks</th><th>Key Deliverables</th></tr><tr><td>Data Governance</td><td>Wk 1&ndash;43</td><td>Purview setup, Data Dictionary (F&A), training &amp; KT</td></tr><tr><td>Data Visualization</td><td>Wk 1&ndash;35</td><td>UATs &rarr; 3 dashboards &rarr; SIT &rarr; UAT &rarr; Power BI publish <span class='cp-tag'>CP</span></td></tr><tr><td>Machine Learning</td><td>Wk 1&ndash;39</td><td>ML#3 Sales Forecast + ML#4 Demand Forecast &rarr; deploy <span class='cp-tag'>CP</span></td></tr><tr><td>Data Lake / Cloud</td><td>Wk 1&ndash;43</td><td>Pipelines, ETL ~300 tables, monitoring, security <span class='cp-tag'>CP</span></td></tr><tr><td>PMO</td><td>Wk 1&ndash;43</td><td>Weekly reports &bull; SteerCo &bull; KPI Mo. 5 &amp; 10 &bull; closure</td></tr></table></div></div><div class="out-row"><div class="out-row-title">Critical Path</div><div class="out-row-body">Kick-off &rarr; Req. gathering &amp; SKU workshops &rarr; Model spec &amp; EDA &rarr; DV &amp; ML development &rarr; SIT &rarr; UAT &rarr; Publish &amp; deploy &rarr; KT &amp; handovers &rarr; Closure (Nov 2024)</div></div><div class="out-row"><div class="out-row-title">Top 3 Schedule Risks</div><div class="out-row-body">1. UAT delays &mdash; rework adds &ge;2 wks per workstream. Fix: 5-day defect SLA, dedicated UAT lead.<br>2. DL/CP pipeline readiness blocks DV &amp; ML simultaneously. Fix: weekly pipeline health check.<br>3. Stakeholder availability &mdash; SKU workshops need 5 business leads at once. Fix: lock dates Week 1.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="s8">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-left">
+          <div class="card-title">Resource Allocation Plan</div>
+          <div class="card-role">Optimize team allocation and forecast capacity gaps before they impact delivery</div>
+          <div class="card-badges">
+            <span class="badge specific">Specific</span>
+            <span class="badge heavy">Heavy context</span>
+            <span class="badge tools">ChatGPT · Claude</span>
+          </div>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-section">
+          <div class="io-grid">
+            <div class="io-col">
+              <h4>Input</h4>
+              <ul>
+                <li>Project plan (phases &amp; tasks with durations)</li>
+                <li>Team roster with roles &amp; availability (%)</li>
+                <li>Skills matrix (optional but recommended)</li>
+              </ul>
+              <div class="tip-box">💡 Include actual availability %, not just FTE counts — AI flags over-allocation accurately.</div>
+            </div>
+            <div class="io-col">
+              <h4>Output</h4>
+              <ul>
+                <li>Resource allocation matrix (who does what, when)</li>
+                <li>Over-allocation warnings with recommended fixes</li>
+                <li>Skill gap analysis and hiring/contracting flags</li>
+              </ul>
+            </div>
+          </div>
+        
+        
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or when team composition changes. Attach project plan + team roster.</p>
+        </div>
+        <div class="card-section">
+          <div class="prompt-label">Template</div>
+          <div class="prompt-block">You are a [role, e.g., Senior PMO Resource Manager].
+Create a resource allocation plan for [Project Name] covering [timeframe].
+Attach: [project plan + team roster with availability % + skills matrix (optional)].
+Flag over-allocation above [X]%. Identify skill gaps. [Director-level / PM-facing] tone.
+Output:
+Resource allocation matrix (Role | Person | Phase | % Allocated | Notes)
+Over-allocation flags with recommended mitigations
+Skill gap summary with hire/contract recommendations
+Evaluation: Verify total allocation per person does not exceed 100%. Flag phases with no assigned resource.</div>
+          <div class="prompt-label">Full example</div>
+          <div class="prompt-block">You are a Senior PMO.
+Create a resource allocation plan for Super App project covering from 21 Nov–4 Jun.
+Attach: the detailed project plan and the team roster (8 resources, varying availability).
+Flag over-allocation above 90%. Identify skill gaps for UAT phase. PM-facing, concise tone.
+Output:
+Resource allocation matrix (Role | Person | Phase | % Allocated | Notes)
+Over-allocation flags with recommended mitigations
+Skill gap summary with hire/contract recommendations
+Evaluation: Verify total allocation per person does not exceed 100%. Flag phases with no assigned resource.</div>
+        </div>
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">RESOURCE ALLOCATION PLAN &mdash; SuperApp (MVP 1.1&ndash;1.2)</div>
+            <div class="out-row"><div class="out-row-title">Period</div><div class="out-row-body">21 Nov 2025 &ndash; 4 Jun 2026</div></div><div class="out-row"><div class="out-row-title">Over-Allocation Review</div><div class="out-row-body">No individual resource allocation exceeds 100%.<br>Executive and governance roles remain within advisory capacity:<br>PM (10%) &bull; Tech Lead (20%) &bull; Frontend Senior (50%)</div></div><div class="out-row"><div class="out-row-title">Skill Gaps</div><div class="out-row-body"><strong>BA capacity reduces after May</strong> &mdash; contract 1 Senior BA.<br><strong>Senior BE support ends before stabilization</strong> &mdash; extend or contract 1 Senior BE.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="content-group-label">Risk &amp; RAID Setup</div>
     <div class="card" id="s11">
       <div class="card-header" onclick="toggle(this)">
         <div class="card-header-left">
@@ -535,13 +540,6 @@ Evaluation: Verify flagged gaps align with original scope. Identify any Sprint 1
           <h4>When to use</h4>
           <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or after major milestones. Attach project plan + meeting notes + status report.</p>
         </div>
-        <div class="card-section output-example-section">
-          <div class="output-label">Generated Output Example</div>
-          <div class="output-box">
-            <div class="output-title">RAID LOG &mdash; SuperApp Project</div>
-            <div class="out-row"><div class="out-row-title">RAID Log</div><div class="out-row-body">Structured log generated covering: R-01 Service Cloud API readiness (High), R-02 Phase 2 contract delay (High), R-03 iAM business rules undefined (High), A-01 All Phase 1 UATs completed, A-02 Historical data availability assumed, I-01 SSO testing blocked, D-01 Salesforce integration dependency.</div></div><div class="out-row"><div class="out-row-title">RAID Quality Review</div><div class="out-row-body"><strong>Items with No Clear Owner:</strong> None identified.<br><strong>Items with Weak Mitigation (Require Further Action):</strong><br>A-02 Historical Data Sufficiency &bull; A-03 E-Tax/E-Invoice Business Value &bull; R-04 ETA &amp; Real-Time Tracking Feasibility</div></div><div class="out-row"><div class="out-row-title">Showstoppers for Sprint 1</div><div class="out-row-body">R-01 Service Cloud API Readiness &bull; R-03 iAM Business Rules &bull; I-01 SSO Testing Blocked</div></div>
-          </div>
-        </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
           <div class="prompt-block">You are a [role, e.g., Senior PMO Risk Analyst].
@@ -558,10 +556,18 @@ Categorize each item as Risk/Assumption/Issue/Dependency. Rate severity (H/M/L).
 Output: RAID table — ID | Category | Description | Severity | Owner | Mitigation | Status
 Evaluation: Verify each item references a source document. Flag items with no clear owner or mitigation.</div>
         </div>
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">RAID LOG &mdash; SuperApp Project</div>
+            <div class="out-row"><div class="out-row-title">RAID Log</div><div class="out-row-body">Structured log generated covering: R-01 Service Cloud API readiness (High), R-02 Phase 2 contract delay (High), R-03 iAM business rules undefined (High), A-01 All Phase 1 UATs completed, A-02 Historical data availability assumed, I-01 SSO testing blocked, D-01 Salesforce integration dependency.</div></div><div class="out-row"><div class="out-row-title">RAID Quality Review</div><div class="out-row-body"><strong>Items with No Clear Owner:</strong> None identified.<br><strong>Items with Weak Mitigation (Require Further Action):</strong><br>A-02 Historical Data Sufficiency &bull; A-03 E-Tax/E-Invoice Business Value &bull; R-04 ETA &amp; Real-Time Tracking Feasibility</div></div><div class="out-row"><div class="out-row-title">Showstoppers for Sprint 1</div><div class="out-row-body">R-01 Service Cloud API Readiness &bull; R-03 iAM Business Rules &bull; I-01 SSO Testing Blocked</div></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Card s12 -->
+
+    <div class="content-group-label">Stakeholder Management</div>
     <div class="card" id="s12">
       <div class="card-header" onclick="toggle(this)">
         <div class="card-header-left">
@@ -603,13 +609,6 @@ Evaluation: Verify each item references a source document. Flag items with no cl
           <h4>When to use</h4>
           <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or when the team changes. Attach project charter + org chart.</p>
         </div>
-        <div class="card-section output-example-section">
-          <div class="output-label">Generated Output Example</div>
-          <div class="output-box">
-            <div class="output-title">STAKEHOLDER REGISTER &mdash; SuperApp Project</div>
-            <div class="out-row"><div class="out-row-title">Influence&ndash;Interest Matrix</div><div class="out-row-body"><strong>Quadrant A &mdash; Manage Closely (High Influence / High Interest):</strong><br>Executive Sponsor &bull; SuperApp Product Owner &bull; IT Management &bull; Service Cloud Team</div></div><div class="out-row"><div class="out-row-title">Engagement Approach</div><div class="out-row-body">Steering Committee &bull; Weekly executive status reporting &bull; Decision and escalation management &bull; Scope and roadmap approvals</div></div><div class="out-row"><div class="out-row-title">Top 3 Engagement Priorities</div><div class="out-row-body">1. <strong>Executive Sponsor:</strong> Monthly steerco &mdash; escalate key decisions within 5 days.<br>2. <strong>IT / Service Cloud:</strong> Weekly sync &mdash; track API readiness and dependencies.<br>3. <strong>Operations / Finance:</strong> Bi-weekly workshop &mdash; secure UAT / Go-Live sign-off.</div></div>
-          </div>
-        </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
           <div class="prompt-block">You are a [role, e.g., Senior PMO Stakeholder Manager].
@@ -631,10 +630,16 @@ Influence-Interest 2x2 map with quadrant labels
 Top 3 engagement priorities with recommended actions
 Evaluation: Confirm all key decision-makers are included. Flag any stakeholder with HIGH influence but no engagement plan.</div>
         </div>
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">STAKEHOLDER REGISTER &mdash; SuperApp Project</div>
+            <div class="out-row"><div class="out-row-title">Influence&ndash;Interest Matrix</div><div class="out-row-body"><strong>Quadrant A &mdash; Manage Closely (High Influence / High Interest):</strong><br>Executive Sponsor &bull; SuperApp Product Owner &bull; IT Management &bull; Service Cloud Team</div></div><div class="out-row"><div class="out-row-title">Engagement Approach</div><div class="out-row-body">Steering Committee &bull; Weekly executive status reporting &bull; Decision and escalation management &bull; Scope and roadmap approvals</div></div><div class="out-row"><div class="out-row-title">Top 3 Engagement Priorities</div><div class="out-row-body">1. <strong>Executive Sponsor:</strong> Monthly steerco &mdash; escalate key decisions within 5 days.<br>2. <strong>IT / Service Cloud:</strong> Weekly sync &mdash; track API readiness and dependencies.<br>3. <strong>Operations / Finance:</strong> Bi-weekly workshop &mdash; secure UAT / Go-Live sign-off.</div></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Card s13 -->
     <div class="card" id="s13">
       <div class="card-header" onclick="toggle(this)">
         <div class="card-header-left">
@@ -675,13 +680,6 @@ Evaluation: Confirm all key decision-makers are included. Flag any stakeholder w
           <h4>When to use</h4>
           <p style="font-size:13.5px;color:#374060;line-height:1.65;">After completing the stakeholder register. Attach register + reporting cadence. Can use output from the Stakeholder Register prompt.</p>
         </div>
-        <div class="card-section output-example-section">
-          <div class="output-label">Generated Output Example</div>
-          <div class="output-box">
-            <div class="output-title">COMMUNICATION PLAN &mdash; SuperApp Project</div>
-            <div class="out-row"><div class="out-row-title">Key Messages by Stakeholder Group</div><div class="out-row-body"><strong>Executive Stakeholders</strong> (Exec Sponsor, PM Director)<br>Key Messages: Overall project health (Scope, Schedule, Budget, Risks)<br><br><strong>Business &amp; Product Stakeholders</strong> (Product Owner, Operations, Finance)<br>Key Messages: Scope progress against roadmap</div></div><div class="out-row"><div class="out-row-title">Communication Matrix</div><div class="out-row-body"><table class='out-table'><tr><th>Stakeholder</th><th>Type</th><th>Frequency</th><th>Channel</th><th>Owner</th></tr><tr><td>Executive Sponsor</td><td>Status Report</td><td>Monthly</td><td>Email + SteerCo</td><td>PMO Lead</td></tr><tr><td>IT / Service Cloud</td><td>Sync Meeting</td><td>Weekly</td><td>Teams</td><td>PM</td></tr><tr><td>Operations / Finance</td><td>Workshop</td><td>Bi-weekly</td><td>In-person</td><td>PM</td></tr></table></div></div><div class="out-row"><div class="out-row-title">Escalation Protocol</div><div class="out-row-body">If stakeholder is unresponsive after 2 contact attempts within 5 business days: escalate to their line manager. If unresolved after 10 days: raise as RAID issue. PM notifies Executive Sponsor.</div></div>
-          </div>
-        </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
           <div class="prompt-block">You are a [role, e.g., PMO Communication Lead].
@@ -704,8 +702,16 @@ Key messages per group (1-2 lines each)
 Escalation protocol for non-responsive stakeholders
 Evaluation: Confirm all HIGH-influence stakeholders have a regular touchpoint. Flag any group with no communication scheduled.</div>
         </div>
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">COMMUNICATION PLAN &mdash; SuperApp Project</div>
+            <div class="out-row"><div class="out-row-title">Key Messages by Stakeholder Group</div><div class="out-row-body"><strong>Executive Stakeholders</strong> (Exec Sponsor, PM Director)<br>Key Messages: Overall project health (Scope, Schedule, Budget, Risks)<br><br><strong>Business &amp; Product Stakeholders</strong> (Product Owner, Operations, Finance)<br>Key Messages: Scope progress against roadmap</div></div><div class="out-row"><div class="out-row-title">Communication Matrix</div><div class="out-row-body"><table class='out-table'><tr><th>Stakeholder</th><th>Type</th><th>Frequency</th><th>Channel</th><th>Owner</th></tr><tr><td>Executive Sponsor</td><td>Status Report</td><td>Monthly</td><td>Email + SteerCo</td><td>PMO Lead</td></tr><tr><td>IT / Service Cloud</td><td>Sync Meeting</td><td>Weekly</td><td>Teams</td><td>PM</td></tr><tr><td>Operations / Finance</td><td>Workshop</td><td>Bi-weekly</td><td>In-person</td><td>PM</td></tr></table></div></div><div class="out-row"><div class="out-row-title">Escalation Protocol</div><div class="out-row-body">If stakeholder is unresponsive after 2 contact attempts within 5 business days: escalate to their line manager. If unresolved after 10 days: raise as RAID issue. PM notifies Executive Sponsor.</div></div>
+          </div>
+        </div>
       </div>
     </div>
+
 
   </main>
 </div>

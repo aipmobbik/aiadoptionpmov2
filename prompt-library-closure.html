@@ -82,6 +82,9 @@ footer{text-align:center;padding:20px;font-size:12px;color:#b0bacf;border-top:1p
 .sidebar a.sub:hover{color:#2752E0;background:rgba(39,82,224,.06);}
 .sidebar a.sub:hover::before{color:#2752E0;}
 a.phase-header{text-decoration:none;}
+.content-group-label{display:flex;align-items:center;gap:10px;margin:32px 0 10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#94a3c0;}
+.content-group-label::after{content:'';flex:1;height:1px;background:rgba(43,52,120,.09);}
+.content-group-label:first-child{margin-top:0;}
 .group-item{border-bottom:1px solid rgba(43,52,120,.06);}
 .group-item:last-child{border-bottom:none;}
 .group-header{display:flex;justify-content:space-between;align-items:center;padding:8px 14px 8px 22px;cursor:pointer;color:#6b7699;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;transition:color .12s,background .12s;user-select:none;}
@@ -175,6 +178,8 @@ a.phase-header{text-decoration:none;}
     <p class="subtitle">Capture lessons learned and turn them into insights for the next project.</p>
 
     <!-- Card s29 -->
+    
+    <div class="content-group-label" style="margin-top:0">Lessons Learned &amp; Post-Project Review</div>
     <div class="card" id="s29">
       <div class="card-header" onclick="toggle(this)">
         <div class="card-header-left">
@@ -216,13 +221,6 @@ a.phase-header{text-decoration:none;}
           <h4>When to use</h4>
           <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project closure or end-of-phase review. Attach closure report + RAID + retrospective survey.</p>
         </div>
-        <div class="card-section output-example-section">
-          <div class="output-label">Generated Output Example</div>
-          <div class="output-box">
-            <div class="output-title">LESSONS LEARNED &mdash; DM&amp;A Phase 2 Project</div>
-            <div class="out-row"><div class="out-row-title">Executive Summary</div><div class="out-row-body">Phase 2 closed on all three formal KPIs: delivered on time (16 months, Meet Expectation), within 5% budget variance (Exceed Expectation), and with a customer satisfaction score of 8.48/10 (Very Good).</div></div><div class="out-row"><div class="out-row-title">What Went Well</div><div class="out-row-body"><strong>People:</strong> DG roles fully defined across 32 domains; Change Management activated newsletters, knowledge sessions, a Bootcamp, and four Learning+ courses.<br><strong>Process:</strong> Phased &ldquo;Think Big, Start Small, Grow Fast&rdquo; structure; batched dashboard rollouts with controlled go-live; no-cost change request absorption.<br><strong>Technology:</strong> Unified Data Lake + centralised Data Warehouse; standardised pipeline templates; ML model live 1 Sep 2023; consistent cross-BU dashboard metrics.</div></div><div class="out-row"><div class="out-row-title">Areas for Improvement</div><div class="out-row-body">Timeline extended from 12&rarr;16 months &mdash; root cause not documented.<br>ML model process integration incomplete &mdash; explicitly deferred to Phase 3.<br>Usage dipped during Nov&ndash;Dec 2023 issue resolution period.<br>No post-Phase 2 DG Maturity re-assessment score documented.</div></div><div class="out-row"><div class="out-row-title">Top 5 Recommendations</div><div class="out-row-body">1. Document root causes of timeline extension before Phase 3 baselining.<br>2. Prioritise end-to-end ML forecasting process integration as a Phase 3 day-one workstream.<br>3. Introduce a formal hypercare period between dashboard go-live and project phase close.<br>4. Conduct a post-Phase 2 DG Maturity re-assessment and establish a Phase 3 target state.<br>5. Formalise dashboard adoption tracking as an ongoing programme KPI.</div></div>
-          </div>
-        </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
           <div class="prompt-block">You are a [role, e.g., Senior PMO Retrospective Facilitator].
@@ -244,8 +242,16 @@ Output:
 Executive Summary | What Went Well (People/Process/Technology) | Areas for Improvement | Top 5 Recommendations
 Evaluation: Every finding must cite a source. Flag any finding without supporting evidence.</div>
         </div>
+        <div class="card-section output-example-section">
+          <div class="output-label">Generated Output Example</div>
+          <div class="output-box">
+            <div class="output-title">LESSONS LEARNED &mdash; DM&amp;A Phase 2 Project</div>
+            <div class="out-row"><div class="out-row-title">Executive Summary</div><div class="out-row-body">Phase 2 closed on all three formal KPIs: delivered on time (16 months, Meet Expectation), within 5% budget variance (Exceed Expectation), and with a customer satisfaction score of 8.48/10 (Very Good).</div></div><div class="out-row"><div class="out-row-title">What Went Well</div><div class="out-row-body"><strong>People:</strong> DG roles fully defined across 32 domains; Change Management activated newsletters, knowledge sessions, a Bootcamp, and four Learning+ courses.<br><strong>Process:</strong> Phased &ldquo;Think Big, Start Small, Grow Fast&rdquo; structure; batched dashboard rollouts with controlled go-live; no-cost change request absorption.<br><strong>Technology:</strong> Unified Data Lake + centralised Data Warehouse; standardised pipeline templates; ML model live 1 Sep 2023; consistent cross-BU dashboard metrics.</div></div><div class="out-row"><div class="out-row-title">Areas for Improvement</div><div class="out-row-body">Timeline extended from 12&rarr;16 months &mdash; root cause not documented.<br>ML model process integration incomplete &mdash; explicitly deferred to Phase 3.<br>Usage dipped during Nov&ndash;Dec 2023 issue resolution period.<br>No post-Phase 2 DG Maturity re-assessment score documented.</div></div><div class="out-row"><div class="out-row-title">Top 5 Recommendations</div><div class="out-row-body">1. Document root causes of timeline extension before Phase 3 baselining.<br>2. Prioritise end-to-end ML forecasting process integration as a Phase 3 day-one workstream.<br>3. Introduce a formal hypercare period between dashboard go-live and project phase close.<br>4. Conduct a post-Phase 2 DG Maturity re-assessment and establish a Phase 3 target state.<br>5. Formalise dashboard adoption tracking as an ongoing programme KPI.</div></div>
+          </div>
+        </div>
       </div>
     </div>
+
 
   </main>
 </div>
