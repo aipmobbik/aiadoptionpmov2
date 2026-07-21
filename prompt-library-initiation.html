@@ -43,7 +43,7 @@ h2{font-size:1.1rem;font-weight:700;color:#2B3478;margin:0 0 20px;padding-bottom
 .card-section ul{padding-left:18px;}
 .card-section ul li{margin-bottom:6px;font-size:13.5px;line-height:1.65;color:#374060;}
 .tip-box{background:#fffdf0;border-left:2px solid #f6c90e;padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px;color:#78610a;margin-top:10px;}
-.prompt-pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+.prompt-pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:0;}
 @media(max-width:700px){.prompt-pair-grid{grid-template-columns:1fr;}}
 .prompt-col{display:flex;flex-direction:column;gap:8px;}
 .prompt-wrapper{display:flex;flex-direction:column;flex:1;border:1px solid rgba(43,52,120,.1);border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(43,52,120,.04);}
@@ -783,7 +783,7 @@ document.querySelectorAll('.card-section').forEach(function(section) {
     col.appendChild(wrapper);
     grid.appendChild(col);
   });
-  section.appendChild(grid);
+  section.style.paddingTop = "8px"; section.appendChild(grid);
 });
 function fallbackCopy(text, cb) {
   var ta = document.createElement('textarea');
