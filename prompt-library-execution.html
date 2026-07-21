@@ -19,7 +19,7 @@ body{font-family:"Segoe UI",Arial,sans-serif;font-size:15px;color:#1e2640;backgr
 h1{font-size:1.85rem;font-weight:800;color:#1e2640;margin-bottom:6px;letter-spacing:-.03em;}
 .subtitle{color:#5280CC;font-size:13.5px;font-style:italic;margin-bottom:36px;opacity:.9;}
 h2{font-size:1.1rem;font-weight:700;color:#2B3478;margin:0 0 20px;padding-bottom:10px;border-bottom:1.5px solid #45C8F0;letter-spacing:-.01em;}
-.card{border:1px solid rgba(43,52,120,.09);border-radius:16px;margin-bottom:10px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(43,52,120,.05),0 1px 2px rgba(0,0,0,.03);transition:box-shadow .2s,border-color .2s;}
+.card{scroll-margin-top:72px;border:1px solid rgba(43,52,120,.09);border-radius:16px;margin-bottom:10px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(43,52,120,.05),0 1px 2px rgba(0,0,0,.03);transition:box-shadow .2s,border-color .2s;}
 .card:hover{box-shadow:0 4px 16px rgba(43,52,120,.1);border-color:rgba(43,52,120,.14);}
 .card-header{padding:18px 22px;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;background:#fff;transition:background .12s;}
 .card-header:hover{background:#fafbff;}
@@ -555,7 +555,7 @@ Evaluation: 3 decisions must appear in body. Email must be ≤150 words. Tone ap
 <footer>AI @ PMO · Prompt Library · Execution</footer>
 
 <script>
-function toggle(header) { var card = header.closest('.card'); var wasOpen = card.classList.contains('open'); document.querySelectorAll('.card.open').forEach(function(c){ c.classList.remove('open'); }); if (!wasOpen) card.classList.add('open'); }
+function toggle(header) { var card = header.closest('.card'); var wasOpen = card.classList.contains('open'); document.querySelectorAll('.card.open').forEach(function(c){ c.classList.remove('open'); }); if (!wasOpen) { card.classList.add('open'); setTimeout(function(){ card.scrollIntoView({behavior:'smooth', block:'start'}); }, 50); } }
 function togglePhase(id) { document.getElementById(id).classList.toggle('open'); }
 function toggleGroup(id) { document.getElementById(id).classList.toggle('open'); }
 document.addEventListener('click', e => {
