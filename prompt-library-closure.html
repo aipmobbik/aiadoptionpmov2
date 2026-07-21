@@ -287,7 +287,7 @@ document.querySelectorAll('.card-section').forEach(function(section) {
       remark.innerHTML = '✏️ <strong>Replace the [ ] parts</strong> with your project details before use.';
       var prevSec = section.previousElementSibling;
       if (prevSec && prevSec.classList.contains('card-section')) {
-        prevSec.appendChild(remark);
+        prevSec.appendChild(remark); prevSec.style.borderBottom = "none";
       }
     }
     label.textContent = isTemplate
