@@ -730,7 +730,7 @@ Evaluation: Confirm all HIGH-influence stakeholders have a regular touchpoint. F
 <footer>AI @ PMO · Prompt Library · Initiation &amp; Planning</footer>
 
 <script>
-function toggle(header) { header.closest('.card').classList.toggle('open'); }
+function toggle(header) { var card = header.closest('.card'); var wasOpen = card.classList.contains('open'); document.querySelectorAll('.card.open').forEach(function(c){ c.classList.remove('open'); }); if (!wasOpen) card.classList.add('open'); }
 function togglePhase(id) { document.getElementById(id).classList.toggle('open'); }
 function toggleGroup(id) { document.getElementById(id).classList.toggle('open'); }
 document.addEventListener('click', e => {
