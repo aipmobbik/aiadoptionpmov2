@@ -77,11 +77,20 @@ footer{text-align:center;padding:20px;font-size:12px;color:#b0bacf;border-top:1p
 .phase-item.open .phase-chevron{transform:rotate(90deg);}
 .phase-subs{display:none;background:rgba(255,255,255,.45);border-top:1px solid rgba(43,52,120,.07);}
 .phase-item.open .phase-subs{display:block;}
-.sidebar a.sub{display:flex;align-items:center;gap:6px;padding:9px 22px 9px 28px;color:#374060;text-decoration:none;font-size:13px;border-left:none;transition:color .1s,background .1s;}
+.sidebar a.sub{display:flex;align-items:center;gap:6px;padding:7px 22px 7px 36px;color:#374060;text-decoration:none;font-size:12.5px;border-left:none;transition:color .1s,background .1s;}
 .sidebar a.sub::before{content:'›';font-size:16px;color:rgba(43,52,120,.3);flex-shrink:0;line-height:1;}
 .sidebar a.sub:hover{color:#2752E0;background:rgba(39,82,224,.06);}
 .sidebar a.sub:hover::before{color:#2752E0;}
 a.phase-header{text-decoration:none;}
+.group-item{border-bottom:1px solid rgba(43,52,120,.06);}
+.group-item:last-child{border-bottom:none;}
+.group-header{display:flex;justify-content:space-between;align-items:center;padding:8px 14px 8px 22px;cursor:pointer;color:#6b7699;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;transition:color .12s,background .12s;user-select:none;}
+.group-header:hover{background:rgba(43,52,120,.04);color:#2752E0;}
+.group-item.open>.group-header{color:#2752E0;}
+.group-chevron{font-size:12px;font-style:normal;transition:transform .2s;flex-shrink:0;color:rgba(43,52,120,.25);line-height:1;}
+.group-item.open .group-chevron{transform:rotate(90deg);}
+.group-subs{display:none;}
+.group-item.open .group-subs{display:block;}
 
     /* ── OUTPUT EXAMPLE ── */
     .output-example-section{background:linear-gradient(135deg,#f6f9ff 0%,#eef4fd 100%);border-top:2px solid #45C8F0;padding:18px 22px;}
@@ -148,7 +157,15 @@ a.phase-header{text-decoration:none;}
         <i class="phase-chevron">›</i>
       </div>
       <div class="phase-subs">
-        <a class="sub" href="#s29">Lessons Learned Report</a>
+        <div class="group-item open" id="ph4g1">
+          <div class="group-header" onclick="toggleGroup('ph4g1')">
+            Lessons Learned &amp; Post-Project Review
+            <i class="group-chevron">›</i>
+          </div>
+          <div class="group-subs">
+            <a class="sub" href="#s29">Lessons Learned Report</a>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -193,17 +210,18 @@ a.phase-header{text-decoration:none;}
             </div>
           </div>
         
+        
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project closure or end-of-phase review. Attach closure report + RAID + retrospective survey.</p>
+        </div>
         <div class="card-section output-example-section">
           <div class="output-label">Generated Output Example</div>
           <div class="output-box">
             <div class="output-title">LESSONS LEARNED &mdash; DM&amp;A Phase 2 Project</div>
             <div class="out-row"><div class="out-row-title">Executive Summary</div><div class="out-row-body">Phase 2 closed on all three formal KPIs: delivered on time (16 months, Meet Expectation), within 5% budget variance (Exceed Expectation), and with a customer satisfaction score of 8.48/10 (Very Good).</div></div><div class="out-row"><div class="out-row-title">What Went Well</div><div class="out-row-body"><strong>People:</strong> DG roles fully defined across 32 domains; Change Management activated newsletters, knowledge sessions, a Bootcamp, and four Learning+ courses.<br><strong>Process:</strong> Phased &ldquo;Think Big, Start Small, Grow Fast&rdquo; structure; batched dashboard rollouts with controlled go-live; no-cost change request absorption.<br><strong>Technology:</strong> Unified Data Lake + centralised Data Warehouse; standardised pipeline templates; ML model live 1 Sep 2023; consistent cross-BU dashboard metrics.</div></div><div class="out-row"><div class="out-row-title">Areas for Improvement</div><div class="out-row-body">Timeline extended from 12&rarr;16 months &mdash; root cause not documented.<br>ML model process integration incomplete &mdash; explicitly deferred to Phase 3.<br>Usage dipped during Nov&ndash;Dec 2023 issue resolution period.<br>No post-Phase 2 DG Maturity re-assessment score documented.</div></div><div class="out-row"><div class="out-row-title">Top 5 Recommendations</div><div class="out-row-body">1. Document root causes of timeline extension before Phase 3 baselining.<br>2. Prioritise end-to-end ML forecasting process integration as a Phase 3 day-one workstream.<br>3. Introduce a formal hypercare period between dashboard go-live and project phase close.<br>4. Conduct a post-Phase 2 DG Maturity re-assessment and establish a Phase 3 target state.<br>5. Formalise dashboard adoption tracking as an ongoing programme KPI.</div></div>
           </div>
-        </div>
-      </div>
-        <div class="card-section">
-          <h4>When to use</h4>
-          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project closure or end-of-phase review. Attach closure report + RAID + retrospective survey.</p>
         </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
@@ -237,6 +255,7 @@ Evaluation: Every finding must cite a source. Flag any finding without supportin
 <script>
 function toggle(header) { header.closest('.card').classList.toggle('open'); }
 function togglePhase(id) { document.getElementById(id).classList.toggle('open'); }
+function toggleGroup(id) { document.getElementById(id).classList.toggle('open'); }
 document.addEventListener('click', e => {
   const a = e.target.closest('.phase-subs a');
   if (!a) return;

@@ -77,11 +77,20 @@ footer{text-align:center;padding:20px;font-size:12px;color:#b0bacf;border-top:1p
 .phase-item.open .phase-chevron{transform:rotate(90deg);}
 .phase-subs{display:none;background:rgba(255,255,255,.45);border-top:1px solid rgba(43,52,120,.07);}
 .phase-item.open .phase-subs{display:block;}
-.sidebar a.sub{display:flex;align-items:center;gap:6px;padding:9px 22px 9px 28px;color:#374060;text-decoration:none;font-size:13px;border-left:none;transition:color .1s,background .1s;}
+.sidebar a.sub{display:flex;align-items:center;gap:6px;padding:7px 22px 7px 36px;color:#374060;text-decoration:none;font-size:12.5px;border-left:none;transition:color .1s,background .1s;}
 .sidebar a.sub::before{content:'›';font-size:16px;color:rgba(43,52,120,.3);flex-shrink:0;line-height:1;}
 .sidebar a.sub:hover{color:#2752E0;background:rgba(39,82,224,.06);}
 .sidebar a.sub:hover::before{color:#2752E0;}
 a.phase-header{text-decoration:none;}
+.group-item{border-bottom:1px solid rgba(43,52,120,.06);}
+.group-item:last-child{border-bottom:none;}
+.group-header{display:flex;justify-content:space-between;align-items:center;padding:8px 14px 8px 22px;cursor:pointer;color:#6b7699;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;transition:color .12s,background .12s;user-select:none;}
+.group-header:hover{background:rgba(43,52,120,.04);color:#2752E0;}
+.group-item.open>.group-header{color:#2752E0;}
+.group-chevron{font-size:12px;font-style:normal;transition:transform .2s;flex-shrink:0;color:rgba(43,52,120,.25);line-height:1;}
+.group-item.open .group-chevron{transform:rotate(90deg);}
+.group-subs{display:none;}
+.group-item.open .group-subs{display:block;}
 
     /* ── OUTPUT EXAMPLE ── */
     .output-example-section{background:linear-gradient(135deg,#f6f9ff 0%,#eef4fd 100%);border-top:2px solid #45C8F0;padding:18px 22px;}
@@ -127,13 +136,45 @@ a.phase-header{text-decoration:none;}
         <i class="phase-chevron">›</i>
       </div>
       <div class="phase-subs">
-        <a class="sub" href="#s6">Project Charter</a>
-        <a class="sub" href="#s7">Project Schedule</a>
-        <a class="sub" href="#s8">Resource Allocation Plan</a>
-        <a class="sub" href="#s10">Requirement &amp; Backlog Analysis</a>
-        <a class="sub" href="#s11">RAID Log</a>
-        <a class="sub" href="#s12">Stakeholder Register &amp; Map</a>
-        <a class="sub" href="#s13">Communication Plan</a>
+        <div class="group-item open" id="ph1g1">
+          <div class="group-header" onclick="toggleGroup('ph1g1')">
+            Project Definition &amp; Scope
+            <i class="group-chevron">›</i>
+          </div>
+          <div class="group-subs">
+            <a class="sub" href="#s6">Generate a Project Charter</a>
+            <a class="sub" href="#s10">Requirement &amp; Backlog Analysis</a>
+          </div>
+        </div>
+        <div class="group-item open" id="ph1g2">
+          <div class="group-header" onclick="toggleGroup('ph1g2')">
+            Planning &amp; Scheduling
+            <i class="group-chevron">›</i>
+          </div>
+          <div class="group-subs">
+            <a class="sub" href="#s7">Generate a Project Schedule</a>
+            <a class="sub" href="#s8">Resource Allocation Plan</a>
+          </div>
+        </div>
+        <div class="group-item open" id="ph1g3">
+          <div class="group-header" onclick="toggleGroup('ph1g3')">
+            Risk &amp; RAID Setup
+            <i class="group-chevron">›</i>
+          </div>
+          <div class="group-subs">
+            <a class="sub" href="#s11">Generate RAID Log from Project Documents</a>
+          </div>
+        </div>
+        <div class="group-item open" id="ph1g4">
+          <div class="group-header" onclick="toggleGroup('ph1g4')">
+            Stakeholder Management
+            <i class="group-chevron">›</i>
+          </div>
+          <div class="group-subs">
+            <a class="sub" href="#s12">Stakeholder Register &amp; Map</a>
+            <a class="sub" href="#s13">Stakeholder Communication Plan</a>
+          </div>
+        </div>
       </div>
     </div>
     <!-- Phase 2 -->
@@ -201,17 +242,18 @@ a.phase-header{text-decoration:none;}
             </div>
           </div>
         
+        
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project initiation — paste your project brief directly. No documents required for the template version.</p>
+        </div>
         <div class="card-section output-example-section">
           <div class="output-label">Generated Output Example</div>
           <div class="output-box">
             <div class="output-title">PROJECT CHARTER &mdash; CBS</div>
             <div class="out-row"><div class="out-row-title">Executive Summary</div><div class="out-row-body">This charter authorises Bluebik Group (BBIK) to deliver a 12-month PMO service governing the IT integration programme across five subsidiaries. The PMO will provide project governance, cross-functional coordination, risk management, change management, and stakeholder communication &mdash; ensuring delivery on time, within budget, and to agreed quality standards.</div></div><div class="out-row"><div class="out-row-title">Objective</div><div class="out-row-body">1. Establish PMO governance across IT landscape<br>2. Achieve IT integration readiness by 15-Nov-2025<br>3. Reduce milestone slippage: &ge;90% on-time delivery across all workstreams</div></div><div class="out-row"><div class="out-row-title">Scope In/Out</div><div class="out-row-body"><span style='color:#166534'>&#10003; In:</span> Governance, Cross-functional PMO, Integration Planning, Risk, Change Mgmt<br><span style='color:#9a3412'>&#10007; Out:</span> IT development/coding, vendor procurement, HR headcount decisions, legal compliance</div></div><div class="out-row"><div class="out-row-title">Stakeholder RACI</div><div class="out-row-body">CTO &mdash; Accountable (Sponsor)<br>PMO Director &mdash; Responsible<br>PMO Manager &mdash; Responsible<br>IT Leadership &mdash; Consult</div></div><div class="out-row"><div class="out-row-title">High-Level Milestones</div><div class="out-row-body">M1 Kick-off &amp; Governance Setup &nbsp;&bull;&nbsp; Feb 2025<br>M3 Master Integration Plan &nbsp;&bull;&nbsp; Mar 2025<br>M5 Phase 1 Foundation Delivery &nbsp;&bull;&nbsp; Apr&ndash;Jun 2025<br>M9 Go-Live Readiness Review &nbsp;&bull;&nbsp; Nov 2025</div></div><div class="out-row"><div class="out-row-title">Top 3 Risks &amp; Assumptions</div><div class="out-row-body">1. Stakeholder misalignment &rarr; 4&ndash;8 wk Go-Live buffer<br>2. BSS/OSS hidden dependencies &rarr; AS-IS mapping in M2; 15% schedule buffer<br>3. Key PMO resource attrition &rarr; Succession plan &amp; knowledge docs assumed pre-approved</div></div>
           </div>
-        </div>
-      </div>
-        <div class="card-section">
-          <h4>When to use</h4>
-          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project initiation — paste your project brief directly. No documents required for the template version.</p>
         </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
@@ -269,17 +311,18 @@ Evaluation: Verify all sections complete. Flag assumptions without a source. Hig
             </div>
           </div>
         
+        
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project kickoff or phase start. Attach charter + team roster.</p>
+        </div>
         <div class="card-section output-example-section">
           <div class="output-label">Generated Output Example</div>
           <div class="output-box">
             <div class="output-title">PROJECT SCHEDULE &mdash; DM&amp;A Phase 3</div>
             <div class="out-row"><div class="out-row-title">Phase Timeline</div><div class="out-row-body"><table class='out-table'><tr><th>Workstream</th><th>Weeks</th><th>Key Deliverables</th></tr><tr><td>Data Governance</td><td>Wk 1&ndash;43</td><td>Purview setup, Data Dictionary (F&A), training &amp; KT</td></tr><tr><td>Data Visualization</td><td>Wk 1&ndash;35</td><td>UATs &rarr; 3 dashboards &rarr; SIT &rarr; UAT &rarr; Power BI publish <span class='cp-tag'>CP</span></td></tr><tr><td>Machine Learning</td><td>Wk 1&ndash;39</td><td>ML#3 Sales Forecast + ML#4 Demand Forecast &rarr; deploy <span class='cp-tag'>CP</span></td></tr><tr><td>Data Lake / Cloud</td><td>Wk 1&ndash;43</td><td>Pipelines, ETL ~300 tables, monitoring, security <span class='cp-tag'>CP</span></td></tr><tr><td>PMO</td><td>Wk 1&ndash;43</td><td>Weekly reports &bull; SteerCo &bull; KPI Mo. 5 &amp; 10 &bull; closure</td></tr></table></div></div><div class="out-row"><div class="out-row-title">Critical Path</div><div class="out-row-body">Kick-off &rarr; Req. gathering &amp; SKU workshops &rarr; Model spec &amp; EDA &rarr; DV &amp; ML development &rarr; SIT &rarr; UAT &rarr; Publish &amp; deploy &rarr; KT &amp; handovers &rarr; Closure (Nov 2024)</div></div><div class="out-row"><div class="out-row-title">Top 3 Schedule Risks</div><div class="out-row-body">1. UAT delays &mdash; rework adds &ge;2 wks per workstream. Fix: 5-day defect SLA, dedicated UAT lead.<br>2. DL/CP pipeline readiness blocks DV &amp; ML simultaneously. Fix: weekly pipeline health check.<br>3. Stakeholder availability &mdash; SKU workshops need 5 business leads at once. Fix: lock dates Week 1.</div></div>
           </div>
-        </div>
-      </div>
-        <div class="card-section">
-          <h4>When to use</h4>
-          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project kickoff or phase start. Attach charter + team roster.</p>
         </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
@@ -342,17 +385,18 @@ Evaluation: Verify all phases from the charter are covered. Flag tasks without o
             </div>
           </div>
         
+        
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or when team composition changes. Attach project plan + team roster.</p>
+        </div>
         <div class="card-section output-example-section">
           <div class="output-label">Generated Output Example</div>
           <div class="output-box">
             <div class="output-title">RESOURCE ALLOCATION PLAN &mdash; SuperApp (MVP 1.1&ndash;1.2)</div>
             <div class="out-row"><div class="out-row-title">Period</div><div class="out-row-body">21 Nov 2025 &ndash; 4 Jun 2026</div></div><div class="out-row"><div class="out-row-title">Over-Allocation Review</div><div class="out-row-body">No individual resource allocation exceeds 100%.<br>Executive and governance roles remain within advisory capacity:<br>PM (10%) &bull; Tech Lead (20%) &bull; Frontend Senior (50%)</div></div><div class="out-row"><div class="out-row-title">Skill Gaps</div><div class="out-row-body"><strong>BA capacity reduces after May</strong> &mdash; contract 1 Senior BA.<br><strong>Senior BE support ends before stabilization</strong> &mdash; extend or contract 1 Senior BE.</div></div>
           </div>
-        </div>
-      </div>
-        <div class="card-section">
-          <h4>When to use</h4>
-          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or when team composition changes. Attach project plan + team roster.</p>
         </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
@@ -415,17 +459,18 @@ Evaluation: Verify total allocation per person does not exceed 100%. Flag phases
             </div>
           </div>
         
+        
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or sprint planning. Attach requirement docs + product backlog.</p>
+        </div>
         <div class="card-section output-example-section">
           <div class="output-label">Generated Output Example</div>
           <div class="output-box">
             <div class="output-title">REQUIREMENT ANALYSIS &mdash; SuperApp Phase 2</div>
             <div class="out-row"><div class="out-row-title">Gap Analysis</div><div class="out-row-body">Gaps identified across backlog items including missing acceptance criteria, undefined integration contracts, and unconfirmed business rules.</div></div><div class="out-row"><div class="out-row-title">Backlog Prioritization by Theme</div><div class="out-row-body"><strong>P1 &mdash; Sprint 1 (Must Have):</strong> iAM integration, SSO authentication, core payment flow, case tracking foundation</div></div><div class="out-row"><div class="out-row-title">Top 3 Risk Flags</div><div class="out-row-body"><div style='color:#9a3412;margin-bottom:6px;'>&#9888; <strong>iAM Business Rules Not Finalized (Showstopper)</strong> &mdash; Blocks Sprint 1 development</div><div style='color:#9a3412;margin-bottom:6px;'>&#9888; <strong>Salesforce Integration Contract Not Defined</strong> &mdash; Case tracking cannot be completed</div><div style='color:#9a3412;'>&#9888; <strong>Missing Acceptance Criteria Across Backlog</strong> &mdash; High risk of rework during SIT/UAT</div></div></div>
           </div>
-        </div>
-      </div>
-        <div class="card-section">
-          <h4>When to use</h4>
-          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or sprint planning. Attach requirement docs + product backlog.</p>
         </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
@@ -484,17 +529,18 @@ Evaluation: Verify flagged gaps align with original scope. Identify any Sprint 1
             </div>
           </div>
         
+        
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or after major milestones. Attach project plan + meeting notes + status report.</p>
+        </div>
         <div class="card-section output-example-section">
           <div class="output-label">Generated Output Example</div>
           <div class="output-box">
             <div class="output-title">RAID LOG &mdash; SuperApp Project</div>
             <div class="out-row"><div class="out-row-title">RAID Log</div><div class="out-row-body">Structured log generated covering: R-01 Service Cloud API readiness (High), R-02 Phase 2 contract delay (High), R-03 iAM business rules undefined (High), A-01 All Phase 1 UATs completed, A-02 Historical data availability assumed, I-01 SSO testing blocked, D-01 Salesforce integration dependency.</div></div><div class="out-row"><div class="out-row-title">RAID Quality Review</div><div class="out-row-body"><strong>Items with No Clear Owner:</strong> None identified.<br><strong>Items with Weak Mitigation (Require Further Action):</strong><br>A-02 Historical Data Sufficiency &bull; A-03 E-Tax/E-Invoice Business Value &bull; R-04 ETA &amp; Real-Time Tracking Feasibility</div></div><div class="out-row"><div class="out-row-title">Showstoppers for Sprint 1</div><div class="out-row-body">R-01 Service Cloud API Readiness &bull; R-03 iAM Business Rules &bull; I-01 SSO Testing Blocked</div></div>
           </div>
-        </div>
-      </div>
-        <div class="card-section">
-          <h4>When to use</h4>
-          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or after major milestones. Attach project plan + meeting notes + status report.</p>
         </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
@@ -551,17 +597,18 @@ Evaluation: Verify each item references a source document. Flag items with no cl
             </div>
           </div>
         
+        
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or when the team changes. Attach project charter + org chart.</p>
+        </div>
         <div class="card-section output-example-section">
           <div class="output-label">Generated Output Example</div>
           <div class="output-box">
             <div class="output-title">STAKEHOLDER REGISTER &mdash; SuperApp Project</div>
             <div class="out-row"><div class="out-row-title">Influence&ndash;Interest Matrix</div><div class="out-row-body"><strong>Quadrant A &mdash; Manage Closely (High Influence / High Interest):</strong><br>Executive Sponsor &bull; SuperApp Product Owner &bull; IT Management &bull; Service Cloud Team</div></div><div class="out-row"><div class="out-row-title">Engagement Approach</div><div class="out-row-body">Steering Committee &bull; Weekly executive status reporting &bull; Decision and escalation management &bull; Scope and roadmap approvals</div></div><div class="out-row"><div class="out-row-title">Top 3 Engagement Priorities</div><div class="out-row-body">1. <strong>Executive Sponsor:</strong> Monthly steerco &mdash; escalate key decisions within 5 days.<br>2. <strong>IT / Service Cloud:</strong> Weekly sync &mdash; track API readiness and dependencies.<br>3. <strong>Operations / Finance:</strong> Bi-weekly workshop &mdash; secure UAT / Go-Live sign-off.</div></div>
           </div>
-        </div>
-      </div>
-        <div class="card-section">
-          <h4>When to use</h4>
-          <p style="font-size:13.5px;color:#374060;line-height:1.65;">At project start or when the team changes. Attach project charter + org chart.</p>
         </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
@@ -622,17 +669,18 @@ Evaluation: Confirm all key decision-makers are included. Flag any stakeholder w
             </div>
           </div>
         
+        
+      </div>
+        <div class="card-section">
+          <h4>When to use</h4>
+          <p style="font-size:13.5px;color:#374060;line-height:1.65;">After completing the stakeholder register. Attach register + reporting cadence. Can use output from the Stakeholder Register prompt.</p>
+        </div>
         <div class="card-section output-example-section">
           <div class="output-label">Generated Output Example</div>
           <div class="output-box">
             <div class="output-title">COMMUNICATION PLAN &mdash; SuperApp Project</div>
             <div class="out-row"><div class="out-row-title">Key Messages by Stakeholder Group</div><div class="out-row-body"><strong>Executive Stakeholders</strong> (Exec Sponsor, PM Director)<br>Key Messages: Overall project health (Scope, Schedule, Budget, Risks)<br><br><strong>Business &amp; Product Stakeholders</strong> (Product Owner, Operations, Finance)<br>Key Messages: Scope progress against roadmap</div></div><div class="out-row"><div class="out-row-title">Communication Matrix</div><div class="out-row-body"><table class='out-table'><tr><th>Stakeholder</th><th>Type</th><th>Frequency</th><th>Channel</th><th>Owner</th></tr><tr><td>Executive Sponsor</td><td>Status Report</td><td>Monthly</td><td>Email + SteerCo</td><td>PMO Lead</td></tr><tr><td>IT / Service Cloud</td><td>Sync Meeting</td><td>Weekly</td><td>Teams</td><td>PM</td></tr><tr><td>Operations / Finance</td><td>Workshop</td><td>Bi-weekly</td><td>In-person</td><td>PM</td></tr></table></div></div><div class="out-row"><div class="out-row-title">Escalation Protocol</div><div class="out-row-body">If stakeholder is unresponsive after 2 contact attempts within 5 business days: escalate to their line manager. If unresolved after 10 days: raise as RAID issue. PM notifies Executive Sponsor.</div></div>
           </div>
-        </div>
-      </div>
-        <div class="card-section">
-          <h4>When to use</h4>
-          <p style="font-size:13.5px;color:#374060;line-height:1.65;">After completing the stakeholder register. Attach register + reporting cadence. Can use output from the Stakeholder Register prompt.</p>
         </div>
         <div class="card-section">
           <div class="prompt-label">Template</div>
@@ -667,6 +715,7 @@ Evaluation: Confirm all HIGH-influence stakeholders have a regular touchpoint. F
 <script>
 function toggle(header) { header.closest('.card').classList.toggle('open'); }
 function togglePhase(id) { document.getElementById(id).classList.toggle('open'); }
+function toggleGroup(id) { document.getElementById(id).classList.toggle('open'); }
 document.addEventListener('click', e => {
   const a = e.target.closest('.phase-subs a');
   if (!a) return;
