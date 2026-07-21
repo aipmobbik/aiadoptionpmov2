@@ -82,7 +82,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:#b0bacf;border-top:1p
 .sidebar a.sub:hover{color:#2752E0;background:rgba(39,82,224,.06);}
 .sidebar a.sub:hover::before{color:#2752E0;}
 a.phase-header{text-decoration:none;}
-.content-group-label{display:flex;align-items:center;gap:10px;margin:32px 0 10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#94a3c0;}
+.content-group-label{display:flex;align-items:center;gap:12px;margin:36px 0 14px;font-size:15px;font-weight:700;color:#1e2640;letter-spacing:-.02em;}
 .content-group-label::after{content:'';flex:1;height:1px;background:rgba(43,52,120,.09);}
 .content-group-label:first-child{margin-top:0;}
 .group-item{border-bottom:1px solid rgba(43,52,120,.06);}
@@ -153,7 +153,7 @@ a.phase-header{text-decoration:none;}
         <i class="phase-chevron">›</i>
       </div>
       <div class="phase-subs">
-        <div class="group-item open" id="ph3g1">
+        <div class="group-item" id="ph3g1">
           <div class="group-header" onclick="toggleGroup('ph3g1')">
             Risk Planning
             <i class="group-chevron">›</i>
@@ -162,7 +162,7 @@ a.phase-header{text-decoration:none;}
             <a class="sub" href="#s21">What-If Impact Analysis</a>
           </div>
         </div>
-        <div class="group-item open" id="ph3g2">
+        <div class="group-item" id="ph3g2">
           <div class="group-header" onclick="toggleGroup('ph3g2')">
             Change Management &amp; Change Requests
             <i class="group-chevron">›</i>
@@ -172,7 +172,7 @@ a.phase-header{text-decoration:none;}
             <a class="sub" href="#s23">Draft Change Request (CR) Form</a>
           </div>
         </div>
-        <div class="group-item open" id="ph3g3">
+        <div class="group-item" id="ph3g3">
           <div class="group-header" onclick="toggleGroup('ph3g3')">
             Project Analysis &amp; Governance
             <i class="group-chevron">›</i>
@@ -181,7 +181,7 @@ a.phase-header{text-decoration:none;}
             <a class="sub" href="#s25">Project Health Check Assessment</a>
           </div>
         </div>
-        <div class="group-item open" id="ph3g4">
+        <div class="group-item" id="ph3g4">
           <div class="group-header" onclick="toggleGroup('ph3g4')">
             Project Coordination &amp; Follow-up
             <i class="group-chevron">›</i>
@@ -190,7 +190,7 @@ a.phase-header{text-decoration:none;}
             <a class="sub" href="#s26">Dependency &amp; Blocker Detection</a>
           </div>
         </div>
-        <div class="group-item open" id="ph3g5">
+        <div class="group-item" id="ph3g5">
           <div class="group-header" onclick="toggleGroup('ph3g5')">
             Reporting &amp; Executive Communication
             <i class="group-chevron">›</i>
@@ -757,8 +757,12 @@ document.querySelectorAll('.card-section').forEach(function(section) {
     if (isTemplate) {
       var remark = document.createElement('div');
       remark.className = 'template-remark';
+      remark.style.marginTop = '12px';
       remark.innerHTML = '✏️ <strong>Replace the [ ] parts</strong> with your project details before use.';
-      col.appendChild(remark);
+      var prevSec = section.previousElementSibling;
+      if (prevSec && prevSec.classList.contains('card-section')) {
+        prevSec.appendChild(remark);
+      }
     }
     label.textContent = isTemplate
       ? 'Template — replace the [ ] parts with your project details'
